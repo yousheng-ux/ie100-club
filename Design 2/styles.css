@@ -105,6 +105,10 @@ header {
   text-align: center; color: inherit; white-space: nowrap;
 }
 .brand b { color: var(--gold); font-weight: 600; }
+/* real logo image: white over the hero/banner, full-colour once the nav turns solid */
+.brand img { height: 26px; width: auto; display: block; margin: 0 auto; filter: brightness(0) invert(1); transition: filter .4s var(--ease); }
+header.solid .brand img { filter: none; }
+.foot-brand .brand img { height: 32px; margin: 0; filter: brightness(0) invert(1); }
 
 header.solid { background: var(--bg); box-shadow: 0 1px 0 var(--line); }
 header.solid .nav { color: var(--char); height: 74px; }
