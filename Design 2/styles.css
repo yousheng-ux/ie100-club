@@ -293,11 +293,26 @@ footer { background: var(--char); color: rgba(255,255,255,.7); }
 @media (max-width: 600px) {
   .acc-body { grid-template-columns: 1fr; }
   .acc-body .acc-media img { height: 180px; }
-  .acc-head { gap: 16px; padding-left: 4px; padding-right: 4px; }
-  .acc-idx { width: 34px; font-size: 13px; }
+  .acc-head { gap: 14px; padding-left: 4px; padding-right: 4px; }
+  .acc-idx { width: 30px; font-size: 13px; }
   .gallery figure { flex: 1 1 100%; height: 240px; }
   .foot-top { grid-template-columns: 1fr; }
-  .hero-sub { letter-spacing: 0.28em; }
+  .foot-bottom { flex-direction: column; gap: 6px; }
+  /* keep the hero wordmark + tagline from overflowing narrow screens */
+  .hero-mark { font-size: clamp(52px, 17vw, 78px); }
+  .hero-sub { letter-spacing: 0.2em; font-size: 12px; }
+  .hero-cn { letter-spacing: 0.12em; font-size: 13px; }
+  .intro .sub { letter-spacing: 0.2em; }
+  .invite-inner .btn, .banner-inner { width: auto; }
+}
+
+/* ---- Small phones (≤400, e.g. iPhone SE) ---- */
+@media (max-width: 400px) {
+  .hero-mark { letter-spacing: 0.1em; text-indent: 0; }
+  .hero-cn { letter-spacing: 0.04em; }
+  .btn { padding: 14px 26px; }
+  .acc-title { font-size: 20px; }
+  .section-label h2, .shead h2 { font-size: 22px; }
 }
 
 /* =====================================================================
