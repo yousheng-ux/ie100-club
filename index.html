@@ -3,68 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IE100 俱乐部 — 网站设计方案预览</title>
-  <meta name="description" content="IE100 俱乐部官方网站设计方案预览：方案一（沉稳编辑式）与方案二（温暖生态式）。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>IE100 俱乐部 — 国际企业家100俱乐部</title>
+  <meta name="description" content="IE100 俱乐部 — 聚焦全球华人企业家的高端商业社群，私密、闭环的跨境商业生态。" />
+  <!-- Root redirects to the selected design (Design 1) -->
+  <meta http-equiv="refresh" content="0; url=Design%201/index.html" />
+  <script>window.location.replace("Design%201/index.html");</script>
   <style>
-    :root{
-      --ink:#1b1b1b; --muted:#7a7468; --line:#e3ddd1; --gold:#9c7a4e;
-      --serif:"Noto Serif SC",serif; --display:"Playfair Display","Noto Serif SC",serif;
-      --sans:"Inter","Noto Sans SC",-apple-system,sans-serif;
-      --ease:cubic-bezier(.22,1,.36,1);
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:var(--sans);color:var(--ink);background:#f4efe6;line-height:1.7;-webkit-font-smoothing:antialiased}
-    .top{text-align:center;padding:clamp(56px,9vw,110px) 24px clamp(30px,5vw,56px)}
-    .top .brand-logo{height:clamp(56px,9vw,92px);width:auto;margin:0 auto}
-    .top .sub{font-family:var(--serif);letter-spacing:.34em;text-transform:uppercase;font-size:clamp(11px,1.5vw,15px);color:var(--muted);margin-top:16px}
-    .top p{max-width:52ch;margin:24px auto 0;color:var(--muted);font-size:16px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1100px;margin:0 auto;padding:0 24px clamp(60px,9vw,120px)}
-    .card{display:block;color:inherit;position:relative;overflow:hidden;border:1px solid var(--line);background:#fff;transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
-    .card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(40,35,28,.16)}
-    .card .pic{height:320px;background-size:cover;background-position:center;transition:transform 1.2s var(--ease)}
-    .card:hover .pic{transform:scale(1.06)}
-    .card .body{padding:32px 34px 38px}
-    .card .tag{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-    .card h2{font-family:var(--serif);font-weight:600;font-size:26px;margin:12px 0 10px}
-    .card .desc{color:var(--muted);font-size:15px;line-height:1.8;min-height:48px}
-    .card .go{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
-    .card .go::after{content:"→";transition:transform .4s var(--ease)}
-    .card:hover .go::after{transform:translateX(6px)}
-    .foot{text-align:center;color:var(--muted);font-size:13px;padding:0 24px 50px}
-    @media(max-width:760px){.grid{grid-template-columns:1fr}.card .pic{height:240px}}
+    body{font-family:"Inter","Noto Sans SC",sans-serif;background:#16344F;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
+    a{color:#B79256}
   </style>
 </head>
 <body>
-  <div class="top">
-    <img class="brand-logo" src="ProjectInfo/LOGO.png" alt="IE100 CLUB 国际企业家100俱乐部" />
-    <div class="sub">Website Design Proposals</div>
-    <p>国际企业家100俱乐部 · 官方网站设计方案预览。请点击下方任一方案查看完整网站。</p>
-  </div>
-
-  <div class="grid">
-    <a class="card" href="Design%201/index.html">
-      <div class="pic" style="background-image:url('KV%20Image/KV%20Image%20rotation/KV4.jpg')"></div>
-      <div class="body">
-        <div class="tag">方案一 · Design 1</div>
-        <h2>沉稳 · 编辑式</h2>
-        <div class="desc">深海军蓝主调，锐利的编辑式排版，沉稳、专业、具投资机构气质。</div>
-        <span class="go">查看网站</span>
-      </div>
-    </a>
-    <a class="card" href="Design%202/index.html">
-      <div class="pic" style="background-image:url('KV%20Image/Business4.jpg')"></div>
-      <div class="body">
-        <div class="tag">方案二 · Design 2</div>
-        <h2>温暖 · 生态式</h2>
-        <div class="desc">米色暖调，高对比衬线大字，轻盈优雅，具高端生活方式气质。</div>
-        <span class="go">查看网站</span>
-      </div>
-    </a>
-  </div>
-
-  <div class="foot">© 2026 IE100 俱乐部 · 设计方案预览</div>
+  <p>正在进入 IE100 俱乐部官网… <a href="Design%201/index.html">点击此处直接进入</a></p>
 </body>
 </html>

@@ -1,9 +1,7 @@
-# IE100 俱乐部 — 官方网站设计方案
+# IE100 俱乐部 — 官方网站
 
-两套设计方案预览（GitHub Pages 托管）：
+客户已选定 **Design 1（沉稳·编辑式）**，根目录自动跳转至 `/Design 1/`。
 
-- **方案一（沉稳·编辑式）**: `/Design 1/`
-- **方案二（温暖·生态式）**: `/Design 2/`
-
-根目录 `index.html` 为方案选择落地页。
-`KV Image/` 为两套方案共享的图片素材库。
+- `KV Image/` — 图片素材库
+- `ProjectInfo/LOGO.png` — 官方 Logo
+- Design 2 已归档（仅保留在本地 `Archive/`，不对外发布）
