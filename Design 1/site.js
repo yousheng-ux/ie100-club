@@ -147,6 +147,25 @@
         if (emailEl) fd.append('email', emailEl.value); // keeps Reply-To = applicant
         fd.append('message', lines.join('\n'));
 
+        // ---- parallel: record application to Google Sheet (fire-and-forget) ----
+        // Only membership applications (identified by the gender field) are archived.
+        if (form.querySelector('[name="gender"]')) {
+          try {
+            const record = { source: '官网入会表单' };
+            form.querySelectorAll('input, select, textarea').forEach((el) => {
+              if (el.type === 'hidden' || el.type === 'submit' || el.name === 'botcheck' || !el.name) return;
+              if (el.type === 'checkbox') record[el.name] = el.checked;
+              else record[el.name] = (el.value || '').trim();
+            });
+            fetch('https://script.google.com/macros/s/AKfycbwUAd7m9GZDytnIKpFFofNhWeoUw7k8xR8bVytp6awfKM-fz-JFxzMh6petlzTu4q6gaw/exec', {
+              method: 'POST',
+              mode: 'no-cors', // Apps Script doesn't send CORS headers; opaque response is fine
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify(record),
+            }).catch(function () {});
+          } catch (_) {}
+        }
+
         // ---- submit ----
         const btn = form.querySelector('button[type="submit"]');
         const orig = btn ? btn.textContent : '';
