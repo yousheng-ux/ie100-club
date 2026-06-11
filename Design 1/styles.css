@@ -563,8 +563,22 @@
     }
     .form-success.show { display: block; }
 
+    /* form section divider + consent checkbox */
+    .form-sect {
+      grid-column: 1 / -1; font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--gold); padding-top: 18px; border-top: 1px solid var(--line); margin-top: 6px;
+    }
+    .form-sect:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+    .field-check {
+      grid-column: 1 / -1; display: flex; gap: 12px; align-items: flex-start;
+      font-size: 14px; line-height: 1.7; color: var(--slate); cursor: pointer;
+    }
+    .field-check input { width: 18px; height: 18px; margin-top: 3px; flex: none; accent-color: var(--gold); cursor: pointer; }
+
     /* form on a dark (navy) panel */
     .panel-dark { background: var(--navy); color: #fff; }
+    .panel-dark .form-sect { border-top-color: rgba(255,255,255,.18); }
+    .panel-dark .field-check { color: rgba(255,255,255,.82); }
     .panel-dark .field label { color: rgba(255,255,255,.75); }
     .panel-dark .field input, .panel-dark .field select, .panel-dark .field textarea {
       background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.2); color: #fff;

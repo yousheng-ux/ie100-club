@@ -136,40 +136,74 @@
         <h2 style="color:#fff;">提交您的入会意向</h2>
       </div>
       <form class="form reveal" data-form>
+        <div class="form-sect">申请人信息</div>
         <div class="field">
           <label>姓名 <span class="req">*</span></label>
           <input type="text" name="name" required placeholder="您的姓名" />
         </div>
         <div class="field">
-          <label>公司 / 职务 <span class="req">*</span></label>
-          <input type="text" name="company" required placeholder="公司名称与职务" />
+          <label>性别 <span class="req">*</span></label>
+          <select name="gender" required>
+            <option value="">请选择</option>
+            <option>男</option>
+            <option>女</option>
+          </select>
         </div>
         <div class="field">
-          <label>电子邮箱 <span class="req">*</span></label>
+          <label>电邮 <span class="req">*</span></label>
           <input type="email" name="email" required placeholder="name@example.com" />
         </div>
         <div class="field">
-          <label>联系电话</label>
-          <input type="tel" name="phone" placeholder="+86 " />
+          <label>微信号</label>
+          <input type="text" name="wechat" placeholder="您的微信号" />
+        </div>
+
+        <div class="form-sect">公司信息</div>
+        <div class="field">
+          <label>公司名称 <span class="req">*</span></label>
+          <input type="text" name="company" required placeholder="公司全称" />
+        </div>
+        <div class="field">
+          <label>公司网址</label>
+          <input type="url" name="companyWebsite" placeholder="https://" />
         </div>
         <div class="field full">
-          <label>所在行业</label>
-          <select name="industry">
-            <option value="">请选择</option>
-            <option>金融投资</option>
-            <option>制造与实业</option>
-            <option>科技与互联网</option>
-            <option>消费与零售</option>
-            <option>地产与建筑</option>
-            <option>其他</option>
-          </select>
+          <label>公司地址</label>
+          <input type="text" name="companyAddress" placeholder="公司注册或办公地址" />
         </div>
         <div class="field full">
-          <label>申请说明</label>
-          <textarea name="message" placeholder="简要介绍您的企业、申请意向，或推荐人信息（如有）"></textarea>
+          <label>公司生意范围</label>
+          <textarea name="businessScope" placeholder="请简要描述公司的主营业务与生意范围"></textarea>
         </div>
+
+        <div class="form-sect">推荐与联络</div>
+        <div class="field full">
+          <label>推荐会员姓名</label>
+          <input type="text" name="referrer" placeholder="推荐您入会的现任会员姓名（如有）" />
+        </div>
+        <div class="field">
+          <label>秘书姓名（本人指定的联系人）</label>
+          <input type="text" name="secretaryName" placeholder="您指定的联系人姓名" />
+        </div>
+        <div class="field">
+          <label>秘书电话</label>
+          <input type="tel" name="secretaryPhone" placeholder="+65 / +86 " />
+        </div>
+        <div class="field">
+          <label>秘书电邮</label>
+          <input type="email" name="secretaryEmail" placeholder="email@example.com" />
+        </div>
+        <div class="field">
+          <label>秘书微信号</label>
+          <input type="text" name="secretaryWechat" placeholder="微信号" />
+        </div>
+
+        <label class="field-check">
+          <input type="checkbox" name="agree" required />
+          <span>我在此确认已阅读并同意国际企业家100俱乐部章程，并自愿申请加入该俱乐部。<span class="req">*</span></span>
+        </label>
         <div class="full">
-          <button type="submit" class="btn btn-light">提交申请</button>
+          <button type="submit" class="btn btn-light">提交</button>
           <p class="form-note">提交后，您的信息将发送至俱乐部指定邮箱，我们将在 5 个工作日内与您联系。（演示表单，暂未连接后台）</p>
         </div>
         <div class="form-success">✓ 感谢您的申请！我们已收到您的入会意向，将尽快与您取得联系。</div>

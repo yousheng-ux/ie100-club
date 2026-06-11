@@ -82,7 +82,8 @@
         const ok = form.querySelector('.form-success');
         if (ok) ok.classList.add('show');
         form.querySelectorAll('input, select, textarea').forEach((el) => {
-          if (el.type !== 'submit') el.value = '';
+          if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+          else if (el.type !== 'submit') el.value = '';
         });
         if (ok) ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
