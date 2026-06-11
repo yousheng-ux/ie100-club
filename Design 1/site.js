@@ -76,11 +76,53 @@
 
     // ===== Forms (membership / contact) — live submission via Web3Forms =====
     document.querySelectorAll('form[data-form]').forEach((form) => {
+      form.setAttribute('novalidate', ''); // we handle validation ourselves for clear CN messages
+      const ok = form.querySelector('.form-success');
+      if (ok && !ok.dataset.successText) ok.dataset.successText = ok.textContent;
+
+      const showMsg = (text, isError) => {
+        if (!ok) return;
+        ok.textContent = text;
+        ok.classList.toggle('error', !!isError);
+        ok.classList.add('show');
+        ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+
+      // label text for a field (for readable error lists)
+      const labelOf = (el) => {
+        if (el.closest('.field-check')) return '章程确认（请勾选同意）';
+        const f = el.closest('.field');
+        const l = f && f.querySelector('label');
+        if (!l) return el.name || '必填项';
+        return l.textContent.replace('*', '').trim();
+      };
+
+      // clear red border as soon as user fixes a field
+      form.querySelectorAll('input, select, textarea').forEach((el) => {
+        el.addEventListener('input', () => el.classList.remove('invalid'));
+        el.addEventListener('change', () => el.classList.remove('invalid'));
+      });
+
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        // ---- custom validation with explicit feedback ----
+        const invalid = [];
+        form.querySelectorAll('input, select, textarea').forEach((el) => {
+          if (el.type === 'hidden' || el.type === 'submit' || el.name === 'botcheck') return;
+          el.classList.remove('invalid');
+          if (!el.checkValidity()) { invalid.push(el); el.classList.add('invalid'); }
+        });
+        if (invalid.length) {
+          const items = invalid.map(labelOf);
+          showMsg('✗ 请完善以下栏目后再提交：' + items.join('、'), true);
+          invalid[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          try { invalid[0].focus({ preventScroll: true }); } catch (_) {}
+          return;
+        }
+
+        // ---- submit ----
         const btn = form.querySelector('button[type="submit"]');
-        const ok = form.querySelector('.form-success');
-        if (ok && !ok.dataset.successText) ok.dataset.successText = ok.textContent;
         const orig = btn ? btn.textContent : '';
         if (btn) { btn.disabled = true; btn.textContent = '提交中…'; }
         try {
@@ -90,24 +132,15 @@
           });
           const data = await res.json();
           if (!data.success) throw new Error(data.message || 'submit failed');
-          if (ok) {
-            ok.textContent = ok.dataset.successText;
-            ok.classList.add('show');
-            ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
+          showMsg(ok ? ok.dataset.successText : '', false);
           // reset visible fields only — keep hidden Web3Forms fields intact
           form.querySelectorAll('input, select, textarea').forEach((el) => {
             if (el.type === 'hidden' || el.type === 'submit') return;
-            if (el.name === 'botcheck') { el.checked = false; return; }
             if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
             else el.value = '';
           });
         } catch (err) {
-          if (ok) {
-            ok.textContent = '✗ 提交失败，请稍后重试，或直接发送电邮至 1796734768@qq.com';
-            ok.classList.add('show');
-            ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
+          showMsg('✗ 提交失败，请稍后重试，或直接发送电邮至 1796734768@qq.com', true);
         } finally {
           if (btn) { btn.disabled = false; btn.textContent = orig; }
         }

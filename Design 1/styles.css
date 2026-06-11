@@ -556,12 +556,17 @@
     }
     .field textarea { min-height: 140px; resize: vertical; }
     .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--navy); }
+    /* dropdown option list: force readable dark-on-white (OS popup ignores select colors) */
+    .field select option { color: var(--ink); background: var(--white); }
+    /* invalid field highlight */
+    .field input.invalid, .field select.invalid, .field textarea.invalid { border-color: #C0392B; }
     .form-note { font-size: 13px; color: var(--slate); margin-top: 6px; }
     .form-success {
       display: none; grid-column: 1 / -1; padding: 20px 22px; background: var(--cream);
       border-left: 2px solid var(--gold); color: var(--ink); font-size: 15px;
     }
     .form-success.show { display: block; }
+    .form-success.error { border-left-color: #C0392B; }
 
     /* form section divider + consent checkbox */
     .form-sect {
@@ -584,6 +589,7 @@
       background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.2); color: #fff;
     }
     .panel-dark .field input:focus, .panel-dark .field select:focus, .panel-dark .field textarea:focus { border-color: var(--gold); }
+    .panel-dark .field input.invalid, .panel-dark .field select.invalid, .panel-dark .field textarea.invalid { border-color: #E8826F; }
     .panel-dark .form-note { color: rgba(255,255,255,.6); }
 
     /* ---- Tabs (events filter) ---- */
