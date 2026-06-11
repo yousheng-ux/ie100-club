@@ -74,18 +74,43 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    // ===== Forms (membership / contact) — sample handling, no backend =====
-    // In production this would POST to the server / send to the designated mailbox.
+    // ===== Forms (membership / contact) — live submission via Web3Forms =====
     document.querySelectorAll('form[data-form]').forEach((form) => {
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
         const ok = form.querySelector('.form-success');
-        if (ok) ok.classList.add('show');
-        form.querySelectorAll('input, select, textarea').forEach((el) => {
-          if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
-          else if (el.type !== 'submit') el.value = '';
-        });
-        if (ok) ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (ok && !ok.dataset.successText) ok.dataset.successText = ok.textContent;
+        const orig = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = '提交中…'; }
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: new FormData(form),
+          });
+          const data = await res.json();
+          if (!data.success) throw new Error(data.message || 'submit failed');
+          if (ok) {
+            ok.textContent = ok.dataset.successText;
+            ok.classList.add('show');
+            ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          // reset visible fields only — keep hidden Web3Forms fields intact
+          form.querySelectorAll('input, select, textarea').forEach((el) => {
+            if (el.type === 'hidden' || el.type === 'submit') return;
+            if (el.name === 'botcheck') { el.checked = false; return; }
+            if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+            else el.value = '';
+          });
+        } catch (err) {
+          if (ok) {
+            ok.textContent = '✗ 提交失败，请稍后重试，或直接发送电邮至 1796734768@qq.com';
+            ok.classList.add('show');
+            ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        } finally {
+          if (btn) { btn.disabled = false; btn.textContent = orig; }
+        }
       });
     });
 

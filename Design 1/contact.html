@@ -81,13 +81,17 @@
 
         <div class="reveal">
           <form class="form" data-form>
+            <input type="hidden" name="access_key" value="81f19488-4354-4538-b7ad-3bd4ae60b90c" />
+            <input type="hidden" name="subject" value="IE100官网 · 联系表单留言" />
+            <input type="hidden" name="from_name" value="IE100 官网联系表单" />
+            <input type="checkbox" name="botcheck" tabindex="-1" style="display:none" aria-hidden="true" />
             <div class="field">
               <label>姓名 <span class="req">*</span></label>
               <input type="text" name="name" required placeholder="您的姓名" />
             </div>
             <div class="field">
               <label>公司 / 职务</label>
-              <input type="text" name="company" placeholder="公司名称与职务" />
+              <input type="text" name="公司职务" placeholder="公司名称与职务" />
             </div>
             <div class="field">
               <label>电子邮箱 <span class="req">*</span></label>
@@ -95,11 +99,11 @@
             </div>
             <div class="field">
               <label>联系电话</label>
-              <input type="tel" name="phone" placeholder="+86 " />
+              <input type="tel" name="联系电话" placeholder="+86 " />
             </div>
             <div class="field full">
               <label>咨询主题</label>
-              <select name="topic">
+              <select name="咨询主题">
                 <option value="">请选择</option>
                 <option>入会咨询</option>
                 <option>商务合作</option>
@@ -110,11 +114,11 @@
             </div>
             <div class="field full">
               <label>留言内容 <span class="req">*</span></label>
-              <textarea name="message" required placeholder="请简要描述您的需求"></textarea>
+              <textarea name="留言内容" required placeholder="请简要描述您的需求"></textarea>
             </div>
             <div class="full">
               <button type="submit" class="btn btn-dark">发送留言</button>
-              <p class="form-note">提交后，您的信息将发送至俱乐部指定邮箱。（演示表单，暂未连接后台）</p>
+              <p class="form-note">提交后，您的留言将直接发送至俱乐部秘书处邮箱。</p>
             </div>
             <div class="form-success">✓ 感谢您的留言！我们已收到您的信息，将尽快与您联系。</div>
           </form>
