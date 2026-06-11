@@ -121,6 +121,32 @@
           return;
         }
 
+        // ---- compose payload ----
+        // Web3Forms' email template garbles non-ASCII field NAMES (values are fine),
+        // so we keep ASCII keys and put a fully Chinese summary into the message body.
+        const lines = [];
+        form.querySelectorAll('input, select, textarea').forEach((el) => {
+          if (el.type === 'hidden' || el.type === 'submit' || el.name === 'botcheck') return;
+          if (el.type === 'checkbox') {
+            if (el.checked) lines.push('章程确认：已阅读并同意俱乐部章程');
+            return;
+          }
+          const v = (el.value || '').trim();
+          if (v) lines.push(labelOf(el) + '：' + v);
+        });
+        const fd = new FormData();
+        ['access_key', 'subject', 'from_name'].forEach((k) => {
+          const h = form.querySelector('input[name="' + k + '"]');
+          if (h) fd.append(k, h.value);
+        });
+        const hp = form.querySelector('input[name="botcheck"]');
+        if (hp && hp.checked) fd.append('botcheck', 'on'); // honeypot still trips for bots
+        const nameEl = form.querySelector('[name="name"]');
+        const emailEl = form.querySelector('[name="email"]');
+        if (nameEl) fd.append('name', nameEl.value);
+        if (emailEl) fd.append('email', emailEl.value); // keeps Reply-To = applicant
+        fd.append('message', lines.join('\n'));
+
         // ---- submit ----
         const btn = form.querySelector('button[type="submit"]');
         const orig = btn ? btn.textContent : '';
@@ -128,7 +154,7 @@
         try {
           const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            body: new FormData(form),
+            body: fd,
           });
           const data = await res.json();
           if (!data.success) throw new Error(data.message || 'submit failed');
