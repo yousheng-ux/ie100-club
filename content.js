@@ -14,8 +14,8 @@
   var CFG = window.IE100_SUPABASE || {};
   var READY = !!(CFG.url && CFG.url.indexOf('YOUR-PROJECT') === -1 &&
                  CFG.anonKey && CFG.anonKey.indexOf('YOUR-') === -1);
-  var DOC_CACHE = 'ie100_doc_v1';
-  var EV_CACHE  = 'ie100_events_v1';
+  var DOC_CACHE = 'ie100_doc_v2';
+  var EV_CACHE  = 'ie100_events_v2';
   var CAT_LABELS = { annual: '年度大会', quarterly: '季度交流会', visit: '企业走访', retreat: '领袖研修' };
   var catLabels = null; // overridden from doc.events.categoryLabels
 
