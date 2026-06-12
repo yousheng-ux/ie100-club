@@ -313,7 +313,7 @@ window.IE100_REGISTRY = {
           { key: 'contact.info.item.1.label', label: '项2 · 名称', type: 'text', value: '官方邮箱' },
           { key: 'contact.info.item.1.value', label: '项2 · 内容', type: 'text', value: 'info@springcollege.sg' },
           { key: 'contact.info.item.2.label', label: '项3 · 名称', type: 'text', value: '办公地址' },
-          { key: 'contact.info.item.2.value', label: '项3 · 内容', type: 'text', value: '待补充' },
+          { key: 'contact.info.item.2.value', label: '项3 · 内容', type: 'text', value: '#03-327, Block 135 Jurong Gateway Rd, 600135' },
           { key: 'contact.info.item.3.label', label: '项4 · 名称', type: 'text', value: '办公时间' },
           { key: 'contact.info.item.3.value', label: '项4 · 内容', type: 'text', value: '周一至周五 · 9:00 – 18:00' },
         ]},
