@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://lqqzqehtdfgymifymxmx.supabase.co; connect-src 'self' https://lqqzqehtdfgymifymxmx.supabase.co https://challenges.cloudflare.com; form-action 'self'; base-uri 'none'; object-src 'none'; frame-src https://challenges.cloudflare.com;" />
   <title>IE100 俱乐部 — 国际企业家100俱乐部</title>
   <meta name="description" content="IE100 俱乐部 — 聚焦全球华人企业家的高端商业社群，致力于打造私密、闭环的跨境商业生态。" />
 
@@ -12,6 +13,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
+  <script src="supabase-config.js" defer></script>
+  <script src="vendor/purify.min.js" defer></script>
+  <script src="content.js?v=2" defer></script>
 </head>
 <body>
 
@@ -52,18 +56,18 @@
   <!-- ===== HERO ===== -->
   <section class="hero" id="home">
     <div class="hero-slides" id="heroSlides">
-      <div class="hero-slide" style="background-image:url('KV%20Image/FTU%20Image/Image21.jpg')"></div>
-      <div class="hero-slide" style="background-image:url('KV%20Image/FTU%20Image/Image3.jpg')"></div>
-      <div class="hero-slide" style="background-image:url('KV%20Image/FTU%20Image/Image1.jpg')"></div>
-      <div class="hero-slide" style="background-image:url('KV%20Image/FTU%20Image/Image16.jpg')"></div>
-      <div class="hero-slide" style="background-image:url('KV%20Image/FTU%20Image/Image5.jpg')"></div>
-      <div class="hero-slide" style="background-image:url('KV%20Image/FTU%20Image/Image4.jpg')"></div>
+      <div class="hero-slide" data-cms-img="index.hero.slide.0" style="background-image:url('KV%20Image/FTU%20Image/Image21.jpg')"></div>
+      <div class="hero-slide" data-cms-img="index.hero.slide.1" style="background-image:url('KV%20Image/FTU%20Image/Image3.jpg')"></div>
+      <div class="hero-slide" data-cms-img="index.hero.slide.2" style="background-image:url('KV%20Image/FTU%20Image/Image1.jpg')"></div>
+      <div class="hero-slide" data-cms-img="index.hero.slide.3" style="background-image:url('KV%20Image/FTU%20Image/Image16.jpg')"></div>
+      <div class="hero-slide" data-cms-img="index.hero.slide.4" style="background-image:url('KV%20Image/FTU%20Image/Image5.jpg')"></div>
+      <div class="hero-slide" data-cms-img="index.hero.slide.5" style="background-image:url('KV%20Image/FTU%20Image/Image4.jpg')"></div>
     </div>
     <div class="hero-overlay"></div>
     <div class="wrap hero-inner">
-      <span class="eyebrow">国际企业家100俱乐部</span>
-      <h1>连接全球华商，重塑<br>价值版图</h1>
-      <p>以新加坡为枢纽，构建高信任的全球华商协作网络——资源对接、企业传承、世代相传，仅限受邀加入。</p>
+      <span class="eyebrow" data-cms="index.hero.eyebrow">国际企业家100俱乐部</span>
+      <h1 data-cms="index.hero.title">连接全球华商，重塑<br>价值版图</h1>
+      <p data-cms="index.hero.subtitle">以新加坡为枢纽，构建高信任的全球华商协作网络——资源对接、企业传承、世代相传，仅限受邀加入。</p>
       <div class="hero-actions">
         <a href="membership.html" class="btn btn-light">了解会员</a>
         <a href="about.html" class="btn btn-outline">走进 IE100</a>
@@ -76,29 +80,29 @@
   <section class="block" id="about">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">核心优势</span>
-        <h2>为塑造跨境产业格局的少数卓越者，打造高端商业生态</h2>
+        <span class="eyebrow" data-cms="index.advantages.eyebrow">核心优势</span>
+        <h2 data-cms="index.advantages.title">为塑造跨境产业格局的少数卓越者，打造高端商业生态</h2>
       </div>
       <div class="cards">
         <div class="card reveal">
-          <div class="card-bg" style="background-image:url('KV%20Image/FTU%20Image/Image25.jpg');background-position:30% center;"></div>
+          <div class="card-bg" data-cms-img="index.advantages.card.0.img" style="background-image:url('KV%20Image/FTU%20Image/Image25.jpg');background-position:30% center;"></div>
           <div class="card-icon">◆</div>
-          <h3>1对1 商务资源对接</h3>
-          <p>依托"新加坡加一政策"，为会员对接资本、合作伙伴与跨境商机，助力企业通商东南亚与世界各地。</p>
+          <h3 data-cms="index.advantages.card.0.title">1对1 商务资源对接</h3>
+          <p data-cms="index.advantages.card.0.body">依托"新加坡加一政策"，为会员对接资本、合作伙伴与跨境商机，助力企业通商东南亚与世界各地。</p>
           <a href="about.html" class="learn">了解更多</a>
         </div>
         <div class="card reveal">
-          <div class="card-bg" style="background-image:url('KV%20Image/FTU%20Image/Image2.jpg')"></div>
+          <div class="card-bg" data-cms-img="index.advantages.card.1.img" style="background-image:url('KV%20Image/FTU%20Image/Image2.jpg')"></div>
           <div class="card-icon">◈</div>
-          <h3>企业传承服务</h3>
-          <p>为家族企业的长远延续提供体系化的顾问与服务——让价值跨越世代，基业长青。</p>
+          <h3 data-cms="index.advantages.card.1.title">企业传承服务</h3>
+          <p data-cms="index.advantages.card.1.body">为家族企业的长远延续提供体系化的顾问与服务——让价值跨越世代，基业长青。</p>
           <a href="about.html" class="learn">了解更多</a>
         </div>
         <div class="card reveal">
-          <div class="card-bg" style="background-image:url('KV%20Image/FTU%20Image/Image10.jpg')"></div>
+          <div class="card-bg" data-cms-img="index.advantages.card.2.img" style="background-image:url('KV%20Image/FTU%20Image/Image10.jpg')"></div>
           <div class="card-icon">❖</div>
-          <h3>二代资源链接</h3>
-          <p>一个值得信赖的圈层，连接企业二代与全球范围内的导师、同侪及专属线下体验。</p>
+          <h3 data-cms="index.advantages.card.2.title">二代资源链接</h3>
+          <p data-cms="index.advantages.card.2.body">一个值得信赖的圈层，连接企业二代与全球范围内的导师、同侪及专属线下体验。</p>
           <a href="about.html" class="learn">了解更多</a>
         </div>
       </div>
@@ -108,10 +112,10 @@
   <!-- ===== STATEMENT / 宗旨 ===== -->
   <section class="block statement" id="philosophy">
     <div class="wrap reveal">
-      <span class="eyebrow">宗旨 · Our Purpose</span>
+      <span class="eyebrow" data-cms="index.statement.eyebrow">宗旨 · Our Purpose</span>
       <div class="gold-rule"></div>
-      <p>打造一个国际华人企业家高端社交俱乐部，<span class="muted">为各国企业家和青年创始人提供跨国信息交流，提高国际认知，资产保值增值，促进跨界合作、商务赋能，促进会员事业的发展，促进企业家向投资家转变，促进个人生活品质的提升。</span></p>
-      <cite>— 国际企业家100俱乐部</cite>
+      <p data-cms-html="index.statement.body">打造一个国际华人企业家高端社交俱乐部，<span class="muted">为各国企业家和青年创始人提供跨国信息交流，提高国际认知，资产保值增值，促进跨界合作、商务赋能，促进会员事业的发展，促进企业家向投资家转变，促进个人生活品质的提升。</span></p>
+      <cite data-cms="index.statement.cite">— 国际企业家100俱乐部</cite>
     </div>
   </section>
 
@@ -119,21 +123,21 @@
   <section class="block">
     <div class="wrap">
       <div class="feature-overlay reveal">
-        <img src="KV%20Image/FTU%20Image/Image13.jpg" alt="IE100 会员于私密露台沙龙交流" />
+        <img src="KV%20Image/FTU%20Image/Image13.jpg" alt="IE100 会员于私密露台沙龙交流" data-cms-img="index.feature.img" />
         <div class="overlay-text">
-          <span class="eyebrow">俱乐部体验</span>
-          <h3>从私密的天台沙龙，到闭门论坛，<br>汇聚精挑细选的企业家社群</h3>
+          <span class="eyebrow" data-cms="index.feature.eyebrow">俱乐部体验</span>
+          <h3 data-cms="index.feature.heading">从私密的天台沙龙，到闭门论坛，<br>汇聚精挑细选的企业家社群</h3>
         </div>
       </div>
       <div class="feature-caption reveal">
         <div class="feature-meta">
-          <div class="meta-item"><span class="meta-label">活动形式</span><span class="meta-value">私密沙龙 · 闭门论坛</span></div>
-          <div class="meta-item"><span class="meta-label">举办城市</span><span class="meta-value">上海 · 香港 · 新加坡</span></div>
-          <div class="meta-item"><span class="meta-label">准入方式</span><span class="meta-value">仅限受邀会员</span></div>
+          <div class="meta-item"><span class="meta-label" data-cms="index.feature.meta.0.label">活动形式</span><span class="meta-value" data-cms="index.feature.meta.0.value">私密沙龙 · 闭门论坛</span></div>
+          <div class="meta-item"><span class="meta-label" data-cms="index.feature.meta.1.label">举办城市</span><span class="meta-value" data-cms="index.feature.meta.1.value">上海 · 香港 · 新加坡</span></div>
+          <div class="meta-item"><span class="meta-label" data-cms="index.feature.meta.2.label">准入方式</span><span class="meta-value" data-cms="index.feature.meta.2.value">仅限受邀会员</span></div>
         </div>
         <div class="feature-body">
-          <h4>亲密的圈层，全球的格局</h4>
-          <p>每一次聚会都为真诚的连接、坦率的交流，以及唯有闭环生态方能成就的信任而设。我们相信，最有价值的资源往往诞生于一席对话之间——在这里，企业家彼此成就，跨越边界，共筑长久。</p>
+          <h4 data-cms="index.feature.body.title">亲密的圈层，全球的格局</h4>
+          <p data-cms="index.feature.body.text">每一次聚会都为真诚的连接、坦率的交流，以及唯有闭环生态方能成就的信任而设。我们相信，最有价值的资源往往诞生于一席对话之间——在这里，企业家彼此成就，跨越边界，共筑长久。</p>
         </div>
       </div>
     </div>
@@ -143,17 +147,17 @@
   <section class="block" id="benefits" style="background:var(--cream);">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">会员福利 · Member Benefits</span>
-        <h2>七项专属权益，陪伴会员跨越山海</h2>
+        <span class="eyebrow" data-cms="index.benefits.eyebrow">会员福利 · Member Benefits</span>
+        <h2 data-cms="index.benefits.title">七项专属权益，陪伴会员跨越山海</h2>
       </div>
       <div class="benefit-grid reveal">
-        <div class="benefit"><span class="b-mark">01</span><div><h3>一对一定制商务对接</h3><p>利用"新加坡加一政策"协助中国企业通商东南亚与世界各地，帮助企业落地新加坡与会员所在国家。</p></div></div>
-        <div class="benefit"><span class="b-mark">02</span><div><h3>资源嫁接</h3><p>青年创始人与成功企业家之间的资源嫁接。</p></div></div>
-        <div class="benefit"><span class="b-mark">03</span><div><h3>会员企业网站</h3><p>打造会员企业网站，推荐会员业务，促进会员之间的合作与引荐。</p></div></div>
-        <div class="benefit"><span class="b-mark">04</span><div><h3>海外商务考察</h3><p>组织商务考察团海外访问，促进商机。</p></div></div>
-        <div class="benefit"><span class="b-mark">05</span><div><h3>投资与企业传承</h3><p>协助企业家成为一个投资家，从战略层面规划企业传承。</p></div></div>
-        <div class="benefit"><span class="b-mark">06</span><div><h3>二代传承护航</h3><p>为二代打通全球商业联络资源，为二代传承保驾护航。</p></div></div>
-        <div class="benefit" style="grid-column:1/-1;"><span class="b-mark">07</span><div><h3>尊崇会员身份</h3><p>拥有高贵的会员身份，国际化的社交标志。</p></div></div>
+        <div class="benefit"><span class="b-mark">01</span><div><h3 data-cms="index.benefits.item.0.title">一对一定制商务对接</h3><p data-cms="index.benefits.item.0.body">利用"新加坡加一政策"协助中国企业通商东南亚与世界各地，帮助企业落地新加坡与会员所在国家。</p></div></div>
+        <div class="benefit"><span class="b-mark">02</span><div><h3 data-cms="index.benefits.item.1.title">资源嫁接</h3><p data-cms="index.benefits.item.1.body">青年创始人与成功企业家之间的资源嫁接。</p></div></div>
+        <div class="benefit"><span class="b-mark">03</span><div><h3 data-cms="index.benefits.item.2.title">会员企业网站</h3><p data-cms="index.benefits.item.2.body">打造会员企业网站，推荐会员业务，促进会员之间的合作与引荐。</p></div></div>
+        <div class="benefit"><span class="b-mark">04</span><div><h3 data-cms="index.benefits.item.3.title">海外商务考察</h3><p data-cms="index.benefits.item.3.body">组织商务考察团海外访问，促进商机。</p></div></div>
+        <div class="benefit"><span class="b-mark">05</span><div><h3 data-cms="index.benefits.item.4.title">投资与企业传承</h3><p data-cms="index.benefits.item.4.body">协助企业家成为一个投资家，从战略层面规划企业传承。</p></div></div>
+        <div class="benefit"><span class="b-mark">06</span><div><h3 data-cms="index.benefits.item.5.title">二代传承护航</h3><p data-cms="index.benefits.item.5.body">为二代打通全球商业联络资源，为二代传承保驾护航。</p></div></div>
+        <div class="benefit" style="grid-column:1/-1;"><span class="b-mark">07</span><div><h3 data-cms="index.benefits.item.6.title">尊崇会员身份</h3><p data-cms="index.benefits.item.6.body">拥有高贵的会员身份，国际化的社交标志。</p></div></div>
       </div>
     </div>
   </section>
@@ -162,9 +166,10 @@
   <section class="block events" id="events">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">常年活动 · Activities</span>
-        <h2>年度大会与论坛 · 季度交流会 · 不定期企业走访</h2>
+        <span class="eyebrow" data-cms="index.events.eyebrow">常年活动 · Activities</span>
+        <h2 data-cms="index.events.title">年度大会与论坛 · 季度交流会 · 不定期企业走访</h2>
       </div>
+      <!-- events-grid is rebuilt from the events table by content.js; cards below are fallback -->
       <div class="events-grid">
         <article class="event reveal">
           <div class="media"><img src="KV%20Image/FTU%20Image/Image22.jpg" alt="年度大会" /></div>
@@ -214,40 +219,40 @@
   <section class="block leaders">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">团队与顾问</span>
-        <h2>由资深企业家与值得信赖的顾问引领</h2>
+        <span class="eyebrow" data-cms="index.leaders.eyebrow">团队与顾问</span>
+        <h2 data-cms="index.leaders.title">由资深企业家与值得信赖的顾问引领</h2>
       </div>
       <div class="leaders-grid">
         <div class="leader reveal">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image11.jpg" alt="创始人肖像" /></div>
+          <div class="media"><img src="KV%20Image/FTU%20Image/Image11.jpg" alt="创始人肖像" data-cms-img="index.leaders.person.0.img" /></div>
           <div>
-            <h3>杨照林</h3>
-            <div class="role">主席（轮值制）</div>
-            <p>逾25年跨境企业建设经验，引领 IE100 打造私密、可信、面向全球华人企业家的社群愿景。</p>
+            <h3 data-cms="index.leaders.person.0.name">杨照林</h3>
+            <div class="role" data-cms="index.leaders.person.0.role">主席（轮值制）</div>
+            <p data-cms="index.leaders.person.0.bio">逾25年跨境企业建设经验，引领 IE100 打造私密、可信、面向全球华人企业家的社群愿景。</p>
           </div>
         </div>
         <div class="leader reveal">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image8.jpg" alt="总监肖像" /></div>
+          <div class="media"><img src="KV%20Image/FTU%20Image/Image8.jpg" alt="总监肖像" data-cms-img="index.leaders.person.1.img" /></div>
           <div>
-            <h3>[ 总监姓名 ]</h3>
-            <div class="role">执行总监</div>
-            <p>主导会员服务与战略资源对接，在金融与企业转型领域拥有深厚经验。</p>
+            <h3 data-cms="index.leaders.person.1.name">[ 总监姓名 ]</h3>
+            <div class="role" data-cms="index.leaders.person.1.role">执行总监</div>
+            <p data-cms="index.leaders.person.1.bio">主导会员服务与战略资源对接，在金融与企业转型领域拥有深厚经验。</p>
           </div>
         </div>
         <div class="leader reveal">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image7.jpg" alt="顾问肖像" /></div>
+          <div class="media"><img src="KV%20Image/FTU%20Image/Image7.jpg" alt="顾问肖像" data-cms-img="index.leaders.person.2.img" /></div>
           <div>
-            <h3>[ 顾问姓名 ]</h3>
-            <div class="role">高级顾问</div>
-            <p>为会员提供企业传承与治理方面的顾问服务，拥有数十年家族企业专业经验。</p>
+            <h3 data-cms="index.leaders.person.2.name">[ 顾问姓名 ]</h3>
+            <div class="role" data-cms="index.leaders.person.2.role">高级顾问</div>
+            <p data-cms="index.leaders.person.2.bio">为会员提供企业传承与治理方面的顾问服务，拥有数十年家族企业专业经验。</p>
           </div>
         </div>
         <div class="leader reveal">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image9.jpg" alt="顾问肖像" /></div>
+          <div class="media"><img src="KV%20Image/FTU%20Image/Image9.jpg" alt="顾问肖像" data-cms-img="index.leaders.person.3.img" /></div>
           <div>
-            <h3>[ 顾问姓名 ]</h3>
-            <div class="role">资源顾问</div>
-            <p>连接跨市场的新一代创始人，促进导师指导与长久的合作伙伴关系。</p>
+            <h3 data-cms="index.leaders.person.3.name">[ 顾问姓名 ]</h3>
+            <div class="role" data-cms="index.leaders.person.3.role">资源顾问</div>
+            <p data-cms="index.leaders.person.3.bio">连接跨市场的新一代创始人，促进导师指导与长久的合作伙伴关系。</p>
           </div>
         </div>
       </div>
@@ -259,12 +264,12 @@
     <div class="wrap">
       <div class="cta-top">
         <div class="reveal">
-          <span class="eyebrow">资格与费用 · Membership</span>
-          <h2 style="margin-top:14px;">全球限额 100 位<br>受邀制高端社群</h2>
+          <span class="eyebrow" data-cms="index.cta.eyebrow">资格与费用 · Membership</span>
+          <h2 style="margin-top:14px;" data-cms="index.cta.title">全球限额 100 位<br>受邀制高端社群</h2>
         </div>
         <div class="reveal">
-          <p style="color:rgba(255,255,255,.85);font-size:17px;margin-bottom:18px;max-width:46ch;">入会资格：具有一定实力的企业家、有潜力的青年创始人（含企业家二代）。申请方法：会员推荐，理事会审批。</p>
-          <p style="color:rgba(255,255,255,.7);font-size:14px;margin-bottom:26px;max-width:46ch;">入会申请费 2,000 新币 · 年费 100 新币（中国境内 12,000 / 800 元人民币）。</p>
+          <p style="color:rgba(255,255,255,.85);font-size:17px;margin-bottom:18px;max-width:46ch;" data-cms="index.cta.text1">入会资格：具有一定实力的企业家、有潜力的青年创始人（含企业家二代）。申请方法：会员推荐，理事会审批。</p>
+          <p style="color:rgba(255,255,255,.7);font-size:14px;margin-bottom:26px;max-width:46ch;" data-cms="index.cta.text2">入会申请费 2,000 新币 · 年费 100 新币（中国境内 12,000 / 800 元人民币）。</p>
           <div class="cta-actions">
             <a href="membership.html#apply" class="btn btn-light">申请入会</a>
             <a href="membership.html" class="learn" style="color:#fff;">了解会员服务</a>
@@ -280,7 +285,7 @@
       <div class="foot-main">
         <div>
           <div class="logo"><img src="ProjectInfo/LOGO.png" alt="IE100 CLUB" /></div>
-          <p>国际企业家100俱乐部——聚焦全球华人企业家，私密、闭环的跨境商业生态社群。<br>隶属于新加坡春天国际控股公司。</p>
+          <p data-cms="footer.about">国际企业家100俱乐部——聚焦全球华人企业家，私密、闭环的跨境商业生态社群。<br>隶属于新加坡春天国际控股公司。</p>
         </div>
         <div class="foot-col">
           <h4>探索</h4>
@@ -303,15 +308,15 @@
         <div class="foot-col">
           <h4>联系我们</h4>
           <ul>
-            <li><a href="mailto:1796734768@qq.com">1796734768@qq.com</a></li>
-            <li>秘书微信 · scilearning</li>
+            <li><a href="mailto:1796734768@qq.com" data-cms="footer.email">1796734768@qq.com</a></li>
+            <li data-cms="footer.wechat">秘书微信 · scilearning</li>
             <li><a href="contact.html">合作咨询</a></li>
           </ul>
         </div>
       </div>
       <div class="foot-bottom">
-        <span>© 2026 IE100 俱乐部. 版权所有.</span>
-        <span>隐私政策 · 条款 · [ ICP 备案号 ]</span>
+        <span data-cms="footer.copyright">© 2026 IE100 俱乐部. 版权所有.</span>
+        <span><a href="privacy.html">隐私政策</a> · 条款 · [ ICP 备案号 ]</span>
       </div>
     </div>
   </footer>

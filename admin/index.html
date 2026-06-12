@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://lqqzqehtdfgymifymxmx.supabase.co; connect-src 'self' https://lqqzqehtdfgymifymxmx.supabase.co; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none';" />
+  <title>IE100 内容管理后台</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --navy:#1b2a4a; --gold:#9a7b4f; --ink:#1c1c1c; --slate:#6b6f76;
+      --line:#e6e3dd; --cream:#f7f5f0; --white:#fff; --ok:#2e7d52; --bad:#b3403a;
+      --radius:12px; --shadow:0 2px 14px rgba(20,24,40,.07);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'Noto Sans SC',system-ui,sans-serif;color:var(--ink);background:var(--cream);font-size:15px;line-height:1.6;}
+    h1,h2,h3{font-family:'Noto Serif SC',serif;font-weight:600;margin:0;}
+    a{color:var(--navy);}
+    button{font-family:inherit;cursor:pointer;}
+    input,select,textarea{font-family:inherit;font-size:15px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);}
+    textarea{min-height:84px;resize:vertical;line-height:1.7;}
+    label{display:block;font-size:13px;color:var(--slate);margin-bottom:6px;}
+    .btn{display:inline-flex;align-items:center;gap:6px;border:none;border-radius:8px;padding:10px 18px;font-size:14px;font-weight:500;background:var(--navy);color:#fff;transition:opacity .2s;}
+    .btn:hover{opacity:.9;}
+    .btn:disabled{opacity:.5;cursor:not-allowed;}
+    .btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line);}
+    .btn.gold{background:var(--gold);}
+    .btn.danger{background:#fff;color:var(--bad);border:1px solid #e7c9c7;}
+    .btn.sm{padding:6px 12px;font-size:13px;}
+    .muted{color:var(--slate);}
+
+    /* ---------- login ---------- */
+    .login-wrap{min-height:100vh;display:grid;place-items:center;padding:24px;}
+    .login-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:38px 34px;width:100%;max-width:380px;}
+    .login-card h1{font-size:22px;margin-bottom:6px;}
+    .login-card .sub{color:var(--slate);font-size:13px;margin-bottom:24px;}
+    .login-card .field{margin-bottom:16px;}
+    .err{color:var(--bad);font-size:13px;margin-top:10px;}
+
+    /* ---------- shell ---------- */
+    .shell{display:flex;min-height:100vh;}
+    .side{width:210px;background:var(--navy);color:#fff;flex-shrink:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;}
+    .side .brand{padding:22px 20px;font-family:'Noto Serif SC',serif;font-weight:600;font-size:18px;border-bottom:1px solid rgba(255,255,255,.12);}
+    .side .brand small{display:block;font-family:'Noto Sans SC';font-weight:300;font-size:11px;opacity:.6;letter-spacing:.08em;margin-top:3px;}
+    .side nav{flex:1;padding:12px 0;}
+    .side nav a{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.82);text-decoration:none;padding:12px 22px;font-size:14px;border-left:3px solid transparent;}
+    .side nav a:hover{background:rgba(255,255,255,.06);}
+    .side nav a.active{background:rgba(255,255,255,.1);border-left-color:var(--gold);color:#fff;}
+    .side .foot{padding:16px 20px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;}
+    .side .foot a{color:rgba(255,255,255,.7);}
+    .main{flex:1;min-width:0;}
+    .topbar{background:#fff;border-bottom:1px solid var(--line);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:5;}
+    .topbar h2{font-size:18px;}
+    .content{padding:26px 28px 80px;max-width:1080px;}
+
+    /* ---------- cards / panels ---------- */
+    .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:18px;overflow:hidden;}
+    .panel-head{padding:14px 18px;background:#fbfaf7;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+    .panel-head h3{font-size:15px;}
+    .panel-body{padding:18px;}
+    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+    .fieldrow{margin-bottom:16px;}
+    .hintbar{background:#eef3fb;border:1px solid #d8e3f5;color:#2c3e60;padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:18px;}
+    .savebar{position:fixed;bottom:0;left:210px;right:0;background:#fff;border-top:1px solid var(--line);padding:12px 28px;display:flex;align-items:center;gap:14px;justify-content:flex-end;z-index:6;}
+    .savebar .status{margin-right:auto;font-size:13px;}
+
+    /* image field */
+    .imgfield{display:flex;gap:14px;align-items:center;}
+    .imgthumb{width:96px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:#f0ede8;flex-shrink:0;}
+
+    /* table */
+    table{width:100%;border-collapse:collapse;font-size:14px;}
+    th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+    th{font-weight:500;color:var(--slate);font-size:12px;background:#fbfaf7;}
+    .tag{display:inline-block;padding:3px 9px;border-radius:20px;font-size:12px;}
+    .t-pending{background:#fdf1d8;color:#8a6d1f;} .t-contacted{background:#e0ecfb;color:#2c5a9e;}
+    .t-approved{background:#dcefe2;color:#2e7d52;} .t-rejected{background:#f5dcdb;color:#b3403a;}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px;}
+    .toolbar input,.toolbar select{width:auto;}
+
+    /* media grid */
+    .media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+    .media-item{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;}
+    .media-item img{width:100%;height:110px;object-fit:cover;display:block;background:#f0ede8;}
+    .media-item .mi-foot{padding:8px 10px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:6px;}
+    .media-item .mi-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .used{color:var(--ok);} .unused{color:var(--slate);}
+
+    /* modal */
+    .modal-bg{position:fixed;inset:0;background:rgba(20,24,40,.45);display:grid;place-items:center;z-index:50;padding:24px;}
+    .modal{background:#fff;border-radius:var(--radius);width:100%;max-width:760px;max-height:84vh;overflow:auto;}
+    .modal-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;}
+    .modal-body{padding:18px 20px;}
+    .rt-toolbar{display:flex;gap:6px;margin-bottom:6px;}
+    .rt-toolbar button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 12px;font-size:13px;}
+    [x-cloak]{display:none!important;}
+    @media(max-width:720px){.side{width:64px;} .side .brand small,.side nav a span{display:none;} .savebar{left:64px;} .grid2{grid-template-columns:1fr;}}
+  </style>
+
+  <!-- libraries + app — all self-hosted (vendored, pinned) so CSP can be script-src 'self'.
+       Order matters: app defines window.adminApp before Alpine boots. -->
+  <script src="../vendor/supabase-js.min.js"></script>
+  <script src="../vendor/purify.min.js" defer></script>
+  <script src="registry.js" defer></script>
+  <script src="../supabase-config.js" defer></script>
+  <script src="admin.js?v=3" defer></script>
+  <script src="../vendor/alpine.min.js" defer></script>
+</head>
+<body>
+<div x-data="adminApp()" x-init="init()" x-cloak>
+
+  <!-- ============ NOT CONFIGURED ============ -->
+  <template x-if="!configured">
+    <div class="login-wrap">
+      <div class="login-card">
+        <h1>尚未连接 Supabase</h1>
+        <p class="sub">请先按 <code>admin/SETUP.md</code> 创建 Supabase 项目，并把网址与公开密钥填入项目根目录的 <code>supabase-config.js</code>。</p>
+      </div>
+    </div>
+  </template>
+
+  <!-- ============ PASSWORD RECOVERY (from reset email) ============ -->
+  <template x-if="configured && recovery">
+    <div class="login-wrap">
+      <form class="login-card" @submit.prevent="setNewPassword()">
+        <h1>设置新密码</h1>
+        <p class="sub">请输入新的登录密码（至少 6 位）</p>
+        <div class="field"><label>新密码</label><input type="password" x-model="pw.a" required /></div>
+        <div class="field"><label>确认新密码</label><input type="password" x-model="pw.b" required /></div>
+        <button class="btn" style="width:100%;justify-content:center;">保存新密码</button>
+        <p class="err" x-show="pw.msg" x-text="pw.msg"></p>
+      </form>
+    </div>
+  </template>
+
+  <!-- ============ LOGIN ============ -->
+  <template x-if="configured && !session && !recovery">
+    <div class="login-wrap">
+      <form class="login-card" @submit.prevent="login()">
+        <h1>IE100 管理后台</h1>
+        <p class="sub">请使用管理员邮箱登录</p>
+        <div class="field"><label>邮箱</label><input type="email" x-model="email" required autocomplete="username" /></div>
+        <div class="field"><label>密码</label><input type="password" x-model="password" required autocomplete="current-password" /></div>
+        <button class="btn" style="width:100%;justify-content:center;" :disabled="loading" x-text="loading?'登录中…':'登录'"></button>
+        <p class="err" x-show="authError" x-text="authError"></p>
+        <p style="text-align:center;margin-top:16px;"><a href="#" @click.prevent="forgotPassword()" style="font-size:13px;">忘记密码？发送重置邮件</a></p>
+        <p x-show="forgotMsg" x-text="forgotMsg" style="font-size:13px;margin-top:8px;color:var(--ok);"></p>
+      </form>
+    </div>
+  </template>
+
+  <!-- ============ APP SHELL ============ -->
+  <template x-if="configured && session && !recovery">
+    <div class="shell">
+      <aside class="side">
+        <div class="brand">IE100<small>内容管理后台</small></div>
+        <nav>
+          <a :class="{active:tab==='applications'}" @click="go('applications')"><span>📋 入会申请</span></a>
+          <a :class="{active:tab==='content'}" @click="go('content')"><span>✏️ 内容编辑</span></a>
+          <a :class="{active:tab==='events'}" @click="go('events')"><span>📅 活动管理</span></a>
+          <a :class="{active:tab==='media'}" @click="go('media')"><span>🖼️ 图片库</span></a>
+          <a :class="{active:tab==='forms'}" @click="go('forms')"><span>📝 表单设置</span></a>
+        </nav>
+        <div class="foot">
+          <div class="muted" x-text="userEmail" style="margin-bottom:8px;word-break:break-all;"></div>
+          <a href="#" @click.prevent="pw.open=true">修改密码</a> · <a href="#" @click.prevent="logout()">退出登录</a><br>
+          <a href="../index.html" target="_blank">查看网站</a>
+        </div>
+      </aside>
+
+      <div class="main">
+        <div class="topbar">
+          <h2 x-text="tabTitle()"></h2>
+          <span class="muted" x-show="toast" x-text="toast" style="font-size:13px;"></span>
+        </div>
+        <div class="content">
+
+          <!-- ===== APPLICATIONS ===== -->
+          <div x-show="tab==='applications'">
+            <div class="hintbar">这里汇总通过官网“入会申请表”提交的会员信息。邮件仍会照常发送到秘书处邮箱，此处用于统一查看与管理。</div>
+            <div class="toolbar">
+              <input type="text" placeholder="搜索姓名 / 邮箱 / 公司" x-model="appSearch" />
+              <select x-model="appFilter">
+                <option value="">全部状态</option>
+                <option value="pending">待处理</option>
+                <option value="contacted">已联系</option>
+                <option value="approved">已通过</option>
+                <option value="rejected">已婉拒</option>
+              </select>
+              <button class="btn ghost sm" @click="loadApplications()">刷新</button>
+              <button class="btn ghost sm" @click="exportCSV()">导出 CSV</button>
+              <span class="muted" style="margin-left:auto;" x-text="filteredApps().length + ' 条'"></span>
+            </div>
+            <div class="panel"><div style="overflow:auto;">
+              <table>
+                <thead><tr>
+                  <th>提交时间</th><th>姓名</th><th>公司</th><th>联系方式</th><th>状态</th><th>备注</th><th></th>
+                </tr></thead>
+                <tbody>
+                  <template x-for="a in filteredApps()" :key="a.id">
+                    <tr>
+                      <td style="white-space:nowrap;" x-text="fmtDate(a.created_at)"></td>
+                      <td>
+                        <strong x-text="a.name||'—'"></strong>
+                        <div class="muted" x-text="a.gender||''"></div>
+                        <a href="#" class="muted" @click.prevent="viewApp(a)" style="font-size:12px;">查看全部</a>
+                      </td>
+                      <td x-text="a.company||'—'"></td>
+                      <td style="font-size:13px;">
+                        <div x-text="a.email||''"></div>
+                        <div class="muted" x-text="a.wechat?('微信 '+a.wechat):''"></div>
+                      </td>
+                      <td>
+                        <select :value="a.status" @change="setStatus(a,$event.target.value)" style="padding:5px 8px;">
+                          <option value="pending">待处理</option>
+                          <option value="contacted">已联系</option>
+                          <option value="approved">已通过</option>
+                          <option value="rejected">已婉拒</option>
+                        </select>
+                      </td>
+                      <td style="min-width:160px;">
+                        <textarea style="min-height:40px;font-size:13px;" :value="a.notes" @change="setNotes(a,$event.target.value)" placeholder="内部备注…"></textarea>
+                      </td>
+                      <td><button class="btn danger sm" @click="deleteApp(a)">删除</button></td>
+                    </tr>
+                  </template>
+                  <tr x-show="!filteredApps().length"><td colspan="7" class="muted" style="text-align:center;padding:30px;">暂无申请记录</td></tr>
+                </tbody>
+              </table>
+            </div></div>
+          </div>
+
+          <!-- ===== CONTENT EDITOR ===== -->
+          <div x-show="tab==='content'">
+            <div class="hintbar">编辑各页面的文字与图片。修改后点击右下角 <strong>保存并发布</strong>，网站会立即更新。带“换行用回车”的标题，按回车即为换行。</div>
+            <div style="margin-bottom:14px;">
+              <label>选择页面</label>
+              <select x-model="curPage" style="max-width:280px;">
+                <template x-for="p in registry.pages" :key="p.id"><option :value="p.id" x-text="p.title"></option></template>
+              </select>
+            </div>
+            <template x-for="p in registry.pages" :key="p.id">
+              <div x-show="curPage===p.id">
+                <template x-for="(sec,si) in p.sections" :key="p.id+si">
+                  <div class="panel">
+                    <div class="panel-head" @click="toggle(p.id+si)"><h3 x-text="sec.title"></h3><span x-text="open[p.id+si]?'−':'+'"></span></div>
+                    <div class="panel-body" x-show="open[p.id+si]===undefined?true:open[p.id+si]">
+                      <template x-for="f in sec.fields" :key="f.key">
+                        <div class="fieldrow">
+                          <label x-text="f.label"></label>
+                          <!-- image -->
+                          <template x-if="f.type==='image'">
+                            <div class="imgfield">
+                              <img class="imgthumb" :src="preview(model[f.key])" />
+                              <div style="flex:1;">
+                                <button class="btn ghost sm" @click="openPicker(f.key)">选择 / 上传图片</button>
+                              </div>
+                            </div>
+                          </template>
+                          <!-- rich -->
+                          <template x-if="f.type==='rich'">
+                            <div>
+                              <div class="rt-toolbar">
+                                <button type="button" @click="rich($event,'strong')"><b>加粗</b></button>
+                                <button type="button" @click="rich($event,'br')">换行</button>
+                                <button type="button" @click="rich($event,'muted')">浅色</button>
+                                <button type="button" @click="rich($event,'p')">段落</button>
+                              </div>
+                              <div class="rt-edit" contenteditable="true" style="min-height:90px;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fff;line-height:1.8;"
+                                   x-init="$el.innerHTML = model[f.key] || ''" @input="model[f.key]=$event.target.innerHTML;dirty=true"></div>
+                            </div>
+                          </template>
+                          <!-- textarea -->
+                          <template x-if="f.type==='textarea'">
+                            <textarea x-model="model[f.key]" @input="dirty=true"></textarea>
+                          </template>
+                          <!-- text -->
+                          <template x-if="f.type==='text'">
+                            <input type="text" x-model="model[f.key]" @input="dirty=true" />
+                          </template>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </template>
+            <div class="savebar">
+              <span class="status" :style="dirty?'color:var(--bad)':'color:var(--ok)'" x-text="dirty?'● 有未保存的修改':'✓ 已是最新'"></span>
+              <button class="btn ghost" @click="loadDoc(true)">放弃修改</button>
+              <button class="btn gold" :disabled="saving" @click="saveDoc()" x-text="saving?'保存中…':'保存并发布'"></button>
+            </div>
+          </div>
+
+          <!-- ===== EVENTS ===== -->
+          <div x-show="tab==='events'">
+            <div class="hintbar">管理“活动动态”页面的活动卡片。<strong>预告</strong>=即将举行，<strong>回顾</strong>=已举办；勾选<strong>首页展示</strong>会出现在首页活动区（最多 4 个）。数字越小越靠前。</div>
+            <div class="toolbar">
+              <button class="btn sm" @click="newEvent()">＋ 新增活动</button>
+              <button class="btn ghost sm" @click="loadEvents()">刷新</button>
+              <button class="btn ghost sm" @click="seedEvents()" x-show="!events.length">用当前网站活动初始化</button>
+            </div>
+            <template x-for="e in events" :key="e.id">
+              <div class="panel"><div class="panel-body">
+                <div class="grid2">
+                  <div class="fieldrow"><label>标题</label><input type="text" x-model="e.title" /></div>
+                  <div class="fieldrow"><label>类别</label>
+                    <select x-model="e.category">
+                      <option value="annual">年度大会</option><option value="quarterly">季度交流会</option>
+                      <option value="visit">企业走访</option><option value="retreat">领袖研修</option>
+                    </select>
+                  </div>
+                  <div class="fieldrow"><label>状态</label><select x-model="e.status"><option value="upcoming">预告（即将举行）</option><option value="past">回顾（已举办）</option></select></div>
+                  <div class="fieldrow"><label>地点</label><input type="text" x-model="e.location" placeholder="如：新加坡" /></div>
+                  <div class="fieldrow"><label>时间（文字）</label><input type="text" x-model="e.date_label" placeholder="如：2026年第四季度" /></div>
+                  <div class="fieldrow"><label>排序（越小越靠前）</label><input type="number" x-model.number="e.sort_order" /></div>
+                </div>
+                <div class="fieldrow"><label>简介</label><textarea x-model="e.summary"></textarea></div>
+                <div class="fieldrow"><label>配图</label>
+                  <div class="imgfield"><img class="imgthumb" :src="preview(e.image_url)" /><button class="btn ghost sm" @click="openPicker('__event__'+e.id)">选择 / 上传图片</button></div>
+                </div>
+                <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;">
+                  <label style="display:inline-flex;align-items:center;gap:6px;margin:0;"><input type="checkbox" x-model="e.featured" style="width:auto;" /> 首页展示</label>
+                  <label style="display:inline-flex;align-items:center;gap:6px;margin:0;"><input type="checkbox" x-model="e.published" style="width:auto;" /> 已发布（显示在网站）</label>
+                  <div style="margin-left:auto;display:flex;gap:8px;">
+                    <button class="btn sm" @click="saveEvent(e)">保存此活动</button>
+                    <button class="btn danger sm" @click="deleteEvent(e)">删除</button>
+                  </div>
+                </div>
+              </div></div>
+            </template>
+            <p class="muted" x-show="!events.length" style="text-align:center;padding:20px;">暂无活动。点击“新增活动”或“初始化”。</p>
+          </div>
+
+          <!-- ===== MEDIA ===== -->
+          <div x-show="tab==='media'">
+            <div class="hintbar">上传与管理网站图片。上传后可在“内容编辑 / 活动管理”里选择使用。<span class="used">绿色=使用中</span>，灰色=未使用（可删除）。</div>
+            <div class="toolbar">
+              <label class="btn sm" style="margin:0;">⬆ 上传图片<input type="file" accept="image/*" multiple @change="uploadMedia($event)" style="display:none;" /></label>
+              <select x-model="uploadFolder" style="width:auto;"><option value="banners">banners</option><option value="events">events</option><option value="team">team</option><option value="general">general</option></select>
+              <button class="btn ghost sm" @click="loadMedia()">刷新</button>
+              <span class="muted" x-show="uploading">上传中…</span>
+            </div>
+            <h3 style="font-size:14px;margin:6px 0 10px;color:var(--slate);">已上传图片</h3>
+            <div class="media-grid">
+              <template x-for="m in mediaFiles" :key="m.url">
+                <div class="media-item">
+                  <img :src="m.url" />
+                  <div class="mi-foot">
+                    <span class="mi-name" :class="usedUrls.has(m.url)?'used':'unused'" x-text="m.name" :title="m.name"></span>
+                    <span style="display:flex;gap:6px;">
+                      <a href="#" @click.prevent="copy(m.url)" title="复制链接">📋</a>
+                      <a href="#" @click.prevent="deleteMedia(m)" title="删除" style="color:var(--bad);" x-show="!usedUrls.has(m.url)">🗑</a>
+                    </span>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <p class="muted" x-show="!mediaFiles.length" style="padding:10px 2px;">暂无上传的图片，点击上方“上传图片”。</p>
+
+            <h3 style="font-size:14px;margin:24px 0 10px;color:var(--slate);">网站原有图片（内置，不可删除）</h3>
+            <div class="media-grid">
+              <template x-for="u in originalImages" :key="'mo'+u">
+                <div class="media-item">
+                  <img :src="'../'+u" loading="lazy" />
+                  <div class="mi-foot">
+                    <span class="mi-name" :class="usedUrls.has(u)?'used':'unused'" x-text="fileName(u)" :title="u"></span>
+                    <a href="#" @click.prevent="copy(u)" title="复制链接">📋</a>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- ===== FORMS ===== -->
+          <div x-show="tab==='forms'">
+            <div class="hintbar">修改表单各字段的文字（标题、提示语、下拉选项、是否必填）。<strong>不会</strong>改变字段的提交逻辑与邮件发送。修改后点“保存表单设置”。</div>
+            <template x-for="fk in ['membership','contact']" :key="fk">
+              <div class="panel">
+                <div class="panel-head"><h3 x-text="fk==='membership'?'入会申请表':'联系表单'"></h3></div>
+                <div class="panel-body">
+                  <template x-for="(fld,name) in forms[fk].fields" :key="fk+name">
+                    <div class="fieldrow" style="border-bottom:1px dashed var(--line);padding-bottom:14px;">
+                      <div class="grid2">
+                        <div><label x-text="'字段：'+name"></label><input type="text" x-model="fld.label" /></div>
+                        <div><label>输入提示语</label><input type="text" x-model="fld.placeholder" /></div>
+                      </div>
+                      <div style="display:flex;gap:18px;align-items:center;margin-top:10px;flex-wrap:wrap;">
+                        <label style="display:inline-flex;align-items:center;gap:6px;margin:0;"><input type="checkbox" x-model="fld.required" style="width:auto;" /> 必填</label>
+                        <template x-if="fld.options">
+                          <div style="flex:1;min-width:220px;"><label>下拉选项（用中文逗号或换行分隔）</label>
+                            <input type="text" :value="(fld.options||[]).join('，')" @change="fld.options=$event.target.value.split(/[，,\n]/).map(s=>s.trim()).filter(Boolean)" />
+                          </div>
+                        </template>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
+            <div class="savebar">
+              <span class="status muted">表单文字会同时保存进内容里</span>
+              <button class="btn gold" :disabled="saving" @click="saveDoc()" x-text="saving?'保存中…':'保存表单设置'"></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== IMAGE PICKER MODAL ===== -->
+      <template x-if="picker.open">
+        <div class="modal-bg" @click.self="picker.open=false">
+          <div class="modal">
+            <div class="modal-head"><h3>选择图片</h3><button class="btn ghost sm" @click="picker.open=false">关闭</button></div>
+            <div class="modal-body">
+              <label class="btn sm" style="margin-bottom:14px;">⬆ 上传新图片<input type="file" accept="image/*" @change="uploadForPicker($event)" style="display:none;" /></label>
+              <h3 style="font-size:14px;margin:8px 0;">已上传图片</h3>
+              <div class="media-grid">
+                <template x-for="m in mediaFiles" :key="'p'+m.url">
+                  <div class="media-item" style="cursor:pointer;" @click="choose(m.url)"><img :src="m.url" /><div class="mi-foot"><span class="mi-name" x-text="m.name"></span></div></div>
+                </template>
+              </div>
+              <h3 style="font-size:14px;margin:18px 0 8px;">网站原有图片</h3>
+              <div class="media-grid">
+                <template x-for="u in originalImages" :key="'o'+u">
+                  <div class="media-item" style="cursor:pointer;" @click="choose(u)"><img :src="'../'+u" /></div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- ===== CHANGE PASSWORD MODAL ===== -->
+      <template x-if="pw.open">
+        <div class="modal-bg" @click.self="pw.open=false">
+          <div class="modal" style="max-width:420px;">
+            <div class="modal-head"><h3>修改密码</h3><button class="btn ghost sm" @click="pw.open=false">关闭</button></div>
+            <div class="modal-body">
+              <div class="fieldrow"><label>新密码（至少 6 位）</label><input type="password" x-model="pw.a" /></div>
+              <div class="fieldrow"><label>确认新密码</label><input type="password" x-model="pw.b" /></div>
+              <p class="err" x-show="pw.msg" x-text="pw.msg"></p>
+              <button class="btn gold" @click="changePassword()">保存新密码</button>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- ===== APPLICATION DETAIL MODAL ===== -->
+      <template x-if="appDetail">
+        <div class="modal-bg" @click.self="appDetail=null">
+          <div class="modal" style="max-width:560px;">
+            <div class="modal-head"><h3>申请详情</h3><button class="btn ghost sm" @click="appDetail=null">关闭</button></div>
+            <div class="modal-body">
+              <table>
+                <template x-for="row in appRows(appDetail)" :key="row[0]">
+                  <tr><th style="white-space:nowrap;" x-text="row[0]"></th><td x-text="row[1]"></td></tr>
+                </template>
+              </table>
+            </div>
+          </div>
+        </div>
+      </template>
+
+    </div>
+  </template>
+
+</div>
+</body>
+</html>

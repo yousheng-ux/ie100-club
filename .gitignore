@@ -2,3 +2,9 @@ ProjectInfo/*.jpg
 ProjectInfo/*.md
 *.psd
 Archive/
+
+# Internal operator docs & DB script — keep local-only (not needed by the live site)
+admin/SETUP.md
+admin/SECURITY-SETUP.md
+admin/使用指南.md
+admin/supabase-setup.sql

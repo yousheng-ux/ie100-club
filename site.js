@@ -121,90 +121,73 @@
           return;
         }
 
-        // ---- compose payload ----
-        // Web3Forms' email template garbles non-ASCII field NAMES (values are fine),
-        // so we keep ASCII keys and put a fully Chinese summary into the message body.
-        const lines = [];
+        // ---- gather whitelisted field values (no secrets, no direct DB write) ----
+        const formType = form.querySelector('[name="gender"]') ? 'membership' : 'contact';
+        const fields = {};
+        let agree = false;
         form.querySelectorAll('input, select, textarea').forEach((el) => {
-          if (el.type === 'hidden' || el.type === 'submit' || el.name === 'botcheck') return;
-          if (el.type === 'checkbox') {
-            if (el.checked) lines.push('章程确认：已阅读并同意俱乐部章程');
-            return;
-          }
+          if (el.type === 'hidden' || el.type === 'submit' || !el.name || el.name === 'botcheck') return;
+          if (el.type === 'checkbox') { if (el.name === 'agree') agree = el.checked; return; }
           const v = (el.value || '').trim();
-          if (v) lines.push(labelOf(el) + '：' + v);
+          if (v) fields[el.name] = v;
         });
-        const fd = new FormData();
-        ['access_key', 'subject', 'from_name'].forEach((k) => {
-          const h = form.querySelector('input[name="' + k + '"]');
-          if (h) fd.append(k, h.value);
-        });
-        const hp = form.querySelector('input[name="botcheck"]');
-        if (hp && hp.checked) fd.append('botcheck', 'on'); // honeypot still trips for bots
-        const nameEl = form.querySelector('[name="name"]');
-        const emailEl = form.querySelector('[name="email"]');
-        if (nameEl) fd.append('name', nameEl.value);
-        if (emailEl) fd.append('email', emailEl.value); // keeps Reply-To = applicant
-        fd.append('message', lines.join('\n'));
+        const hpEl = form.querySelector('input[name="botcheck"]');
+        const website = hpEl && hpEl.checked ? '1' : ''; // honeypot
 
-        // ---- parallel: record application to Google Sheet (fire-and-forget) ----
-        // Only membership applications (identified by the gender field) are archived.
-        if (form.querySelector('[name="gender"]')) {
-          try {
-            const record = { source: '官网入会表单' };
-            form.querySelectorAll('input, select, textarea').forEach((el) => {
-              if (el.type === 'hidden' || el.type === 'submit' || el.name === 'botcheck' || !el.name) return;
-              if (el.type === 'checkbox') record[el.name] = el.checked;
-              else record[el.name] = (el.value || '').trim();
-            });
-            fetch('https://script.google.com/macros/s/AKfycbwUAd7m9GZDytnIKpFFofNhWeoUw7k8xR8bVytp6awfKM-fz-JFxzMh6petlzTu4q6gaw/exec', {
-              method: 'POST',
-              mode: 'no-cors', // Apps Script doesn't send CORS headers; opaque response is fine
-              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-              body: JSON.stringify(record),
-            }).catch(function () {});
-          } catch (_) {}
-        }
+        // Turnstile token, if a widget is mounted on this form
+        let turnstileToken = '';
+        try { if (window.turnstile && form.__tsWidget != null) turnstileToken = window.turnstile.getResponse(form.__tsWidget) || ''; } catch (_) {}
 
-        // ---- submit ----
+        const CFG = window.IE100_SUPABASE || {};
+        const endpoint = (CFG.url && CFG.url.indexOf('YOUR-PROJECT') === -1)
+          ? CFG.url.replace(/\/$/, '') + '/functions/v1/submit-application' : '';
+
+        // ---- submit through the gated Edge Function (Turnstile + validation + fan-out server-side) ----
         const btn = form.querySelector('button[type="submit"]');
         const orig = btn ? btn.textContent : '';
         if (btn) { btn.disabled = true; btn.textContent = '提交中…'; }
         try {
-          const res = await fetch('https://api.web3forms.com/submit', {
+          if (!endpoint) throw new Error('未配置提交服务');
+          const res = await fetch(endpoint, {
             method: 'POST',
-            body: fd,
+            headers: { 'Content-Type': 'application/json', apikey: CFG.anonKey, Authorization: 'Bearer ' + CFG.anonKey },
+            body: JSON.stringify({ formType, fields, agree, website, turnstileToken }),
           });
-          const data = await res.json();
-          if (!data.success) throw new Error(data.message || 'submit failed');
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok) {
+            const map = { verification: '人机验证未通过，请重试。', rate: '提交过于频繁，请稍后再试。', origin: '来源校验失败。' };
+            throw new Error((data && map[data.error]) || '提交失败');
+          }
           showMsg(ok ? ok.dataset.successText : '', false);
-          // reset visible fields only — keep hidden Web3Forms fields intact
           form.querySelectorAll('input, select, textarea').forEach((el) => {
             if (el.type === 'hidden' || el.type === 'submit') return;
             if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
             else el.value = '';
           });
+          try { if (window.turnstile && form.__tsWidget != null) window.turnstile.reset(form.__tsWidget); } catch (_) {}
         } catch (err) {
-          showMsg('✗ 提交失败，请稍后重试，或直接发送电邮至 1796734768@qq.com', true);
+          const m = (err && err.message && err.message !== '提交失败') ? err.message : '提交失败，请稍后重试，或直接发送电邮至 1796734768@qq.com';
+          showMsg('✗ ' + m, true);
         } finally {
           if (btn) { btn.disabled = false; btn.textContent = orig; }
         }
       });
     });
 
-    // ===== Events filter tabs =====
-    const tabs = document.querySelectorAll('.tab');
-    if (tabs.length) {
-      const events = document.querySelectorAll('.events-grid .event');
-      tabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-          tabs.forEach((t) => t.classList.remove('active'));
-          tab.classList.add('active');
-          const cat = tab.getAttribute('data-cat');
-          events.forEach((ev) => {
-            const show = cat === 'all' || ev.getAttribute('data-cat') === cat;
-            ev.classList.toggle('hide', !show);
-          });
-        });
+    // ===== Cloudflare Turnstile — render a managed widget on each form =====
+    // Invoked by the Turnstile api.js (loaded with ?onload=ie100Turnstile&render=explicit).
+    // No-op until a real site key is set in supabase-config.js.
+    window.ie100Turnstile = function () {
+      const key = window.IE100_TURNSTILE_SITEKEY;
+      if (!window.turnstile || !key || key.indexOf('YOUR-') === 0) return;
+      document.querySelectorAll('form[data-form]').forEach(function (form) {
+        const mount = form.querySelector('.ts-mount');
+        if (!mount || form.__tsWidget != null) return;
+        try { form.__tsWidget = window.turnstile.render(mount, { sitekey: key }); } catch (_) {}
       });
-    }
+    };
+
+    // ===== Events filter tabs =====
+    // The tab filter is owned by content.js (it rebuilds the events grid from
+    // Supabase, so the binding must query fresh nodes on each click). Intentionally
+    // not bound here to avoid stale-node handlers after a rebuild.
