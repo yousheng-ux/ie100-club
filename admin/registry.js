@@ -313,7 +313,6 @@ window.IE100_REGISTRY = {
           { key: 'contact.info.item.2.label', label: '项3 · 名称', type: 'text', value: '办公地址' },
           { key: 'contact.info.item.2.value', label: '项3 · 内容', type: 'text', value: '#03-331, Block 135 Jurong Gateway Rd, 600135' },
           { key: 'contact.office.img', label: '办公室照片', type: 'image', value: "KV%20Image/Background2.png" },
-          { key: 'contact.office.caption', label: '办公室照片说明', type: 'text', value: 'IE100 CLUB · 办公室前台' },
         ]},
         { title: '表单文案', fields: [
           { key: 'contact.form.note', label: '表单说明', type: 'textarea', value: '提交后，您的留言将直接发送至俱乐部秘书处邮箱。' },
