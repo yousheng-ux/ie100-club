@@ -121,53 +121,59 @@
           return;
         }
 
-        // ---- gather whitelisted field values (no secrets, no direct DB write) ----
-        const formType = form.querySelector('[name="gender"]') ? 'membership' : 'contact';
-        const fields = {};
+        // ---- gather values: compose a Chinese summary (email body) + a record (sheet) ----
+        const WEB3_KEY = '81f19488-4354-4538-b7ad-3bd4ae60b90c';
+        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwUAd7m9GZDytnIKpFFofNhWeoUw7k8xR8bVytp6awfKM-fz-JFxzMh6petlzTu4q6gaw/exec';
+        const isMember = !!form.querySelector('[name="gender"]');
+        const lines = [];
+        const record = { source: isMember ? '官网入会表单' : '官网联系表单' };
         let agree = false;
         form.querySelectorAll('input, select, textarea').forEach((el) => {
           if (el.type === 'hidden' || el.type === 'submit' || !el.name || el.name === 'botcheck') return;
-          if (el.type === 'checkbox') { if (el.name === 'agree') agree = el.checked; return; }
+          if (el.type === 'checkbox') { if (el.name === 'agree') { agree = el.checked; record.agree = el.checked; } return; }
           const v = (el.value || '').trim();
-          if (v) fields[el.name] = v;
+          if (v) { lines.push(labelOf(el) + '：' + v); record[el.name] = v; }
         });
+        if (isMember && agree) lines.push('章程确认：已阅读并同意俱乐部章程');
+
+        // honeypot
         const hpEl = form.querySelector('input[name="botcheck"]');
-        const website = hpEl && hpEl.checked ? '1' : ''; // honeypot
 
-        // Turnstile token, if a widget is mounted on this form
-        let turnstileToken = '';
-        try { if (window.turnstile && form.__tsWidget != null) turnstileToken = window.turnstile.getResponse(form.__tsWidget) || ''; } catch (_) {}
+        // Web3Forms email payload (ASCII keys; full Chinese summary in message body)
+        const fd = new FormData();
+        fd.append('access_key', WEB3_KEY);
+        fd.append('subject', isMember ? 'IE100官网 · 新会员入会申请' : 'IE100官网 · 联系表单留言');
+        fd.append('from_name', isMember ? 'IE100 官网入会申请表' : 'IE100 官网联系表单');
+        const nameEl = form.querySelector('[name="name"]');
+        const emailEl = form.querySelector('[name="email"]');
+        if (nameEl) fd.append('name', nameEl.value);
+        if (emailEl) fd.append('email', emailEl.value); // reply-to = applicant
+        fd.append('message', lines.join('\n'));
+        if (hpEl && hpEl.checked) fd.append('botcheck', 'on');
 
-        const CFG = window.IE100_SUPABASE || {};
-        const endpoint = (CFG.url && CFG.url.indexOf('YOUR-PROJECT') === -1)
-          ? CFG.url.replace(/\/$/, '') + '/functions/v1/submit-application' : '';
+        // membership applications also archived to the Google Sheet (fire-and-forget)
+        if (isMember) {
+          try {
+            fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(record) }).catch(function () {});
+          } catch (_) {}
+        }
 
-        // ---- submit through the gated Edge Function (Turnstile + validation + fan-out server-side) ----
+        // ---- submit email via Web3Forms ----
         const btn = form.querySelector('button[type="submit"]');
         const orig = btn ? btn.textContent : '';
         if (btn) { btn.disabled = true; btn.textContent = '提交中…'; }
         try {
-          if (!endpoint) throw new Error('未配置提交服务');
-          const res = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', apikey: CFG.anonKey, Authorization: 'Bearer ' + CFG.anonKey },
-            body: JSON.stringify({ formType, fields, agree, website, turnstileToken }),
-          });
-          const data = await res.json().catch(() => ({}));
-          if (!res.ok || !data.ok) {
-            const map = { verification: '人机验证未通过，请重试。', rate: '提交过于频繁，请稍后再试。', origin: '来源校验失败。' };
-            throw new Error((data && map[data.error]) || '提交失败');
-          }
+          const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+          const data = await res.json();
+          if (!data.success) throw new Error(data.message || 'submit failed');
           showMsg(ok ? ok.dataset.successText : '', false);
           form.querySelectorAll('input, select, textarea').forEach((el) => {
             if (el.type === 'hidden' || el.type === 'submit') return;
             if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
             else el.value = '';
           });
-          try { if (window.turnstile && form.__tsWidget != null) window.turnstile.reset(form.__tsWidget); } catch (_) {}
         } catch (err) {
-          const m = (err && err.message && err.message !== '提交失败') ? err.message : '提交失败，请稍后重试，或直接发送电邮至 1796734768@qq.com';
-          showMsg('✗ ' + m, true);
+          showMsg('✗ 提交失败，请稍后重试，或直接发送电邮至 info@ie100club.com', true);
         } finally {
           if (btn) { btn.disabled = false; btn.textContent = orig; }
         }
