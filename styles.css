@@ -113,9 +113,10 @@
     }
     .logo b { color: var(--gold); font-weight: 600; }
     /* full-colour bilingual logo on a clean white badge (legible over hero & solid nav) */
-    .logo img { height: 46px; width: auto; display: block; background: #fff; padding: 5px 9px; border-radius: 7px; box-shadow: 0 2px 12px rgba(20,30,40,.18); transition: box-shadow .4s var(--ease); }
-    header.solid .logo img { box-shadow: none; }
-    @media (max-width: 640px) { .logo img { height: 38px; padding: 4px 7px; border-radius: 6px; } }
+    /* transparent logo: white over the dark hero/footer, full-colour on the solid (light) nav — no box */
+    .logo img { height: 44px; width: auto; display: block; filter: brightness(0) invert(1); transition: filter .4s var(--ease); }
+    header.solid .logo img { filter: none; }
+    @media (max-width: 640px) { .logo img { height: 36px; } }
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a {
       font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
@@ -351,7 +352,7 @@
     .foot-col a { font-size: 14px; transition: color .35s var(--ease); }
     .foot-col a:hover { color: var(--gold); }
     .foot-main .logo { font-family: var(--display); }
-    .foot-main .logo img { height: 50px; width: auto; background: #fff; padding: 6px 10px; border-radius: 7px; }
+    .foot-main .logo img { height: 48px; width: auto; filter: brightness(0) invert(1); }
     .foot-bottom {
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
       padding: 24px 0; border-top: 1px solid rgba(255,255,255,.1); font-size: 13px;
