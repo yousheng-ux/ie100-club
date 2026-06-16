@@ -12,8 +12,7 @@ window.IE100_REGISTRY = {
       sections: [
         { title: '页脚（所有页面共用）', fields: [
           { key: 'footer.about', label: '俱乐部简介', type: 'textarea', value: '国际企业家100俱乐部——聚焦全球华人企业家，私密、闭环的跨境商业生态社群。\n隶属于新加坡春天国际控股公司。' },
-          { key: 'footer.email', label: '联系邮箱', type: 'text', value: '1796734768@qq.com' },
-          { key: 'footer.wechat', label: '秘书微信行', type: 'text', value: '秘书微信 · scilearning' },
+          { key: 'footer.email', label: '联系邮箱', type: 'text', value: 'info@ie100club.com' },
           { key: 'footer.copyright', label: '版权信息', type: 'text', value: '© 2026 IE100 俱乐部. 版权所有.' },
           { key: 'footer.legal', label: '法律/备案行', type: 'text', value: '隐私政策 · 条款 · [ ICP 备案号 ]' },
         ]},
