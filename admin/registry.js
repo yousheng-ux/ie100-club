@@ -322,7 +322,7 @@ window.IE100_REGISTRY = {
   ],
 
   // category slug -> Chinese label (editable in the Events tab)
-  eventCategoryLabels: { annual: '年度大会', quarterly: '季度交流会', visit: '企业走访', retreat: '领袖研修' },
+  eventCategoryLabels: { launch: '开幕盛典', annual: '年度大会', quarterly: '季度交流会', visit: '企业走访', retreat: '领袖研修' },
 };
 
 // ---- form wording defaults (Form-settings tab + applyForms fallback) ----
@@ -358,14 +358,7 @@ window.IE100_FORMS_DEFAULT = {
   },
 };
 
-// ---- events seed (the 8 cards currently on events.html; first 4 marked featured for the homepage) ----
+// ---- events seed (the single card currently on events.html; featured so it also shows on the homepage) ----
 window.IE100_EVENTS_SEED = [
-  { category: 'annual',    title: 'IE100 全球企业家论坛', status: 'upcoming', location: '新加坡', date_label: '2026年第四季度', summary: '旗舰年度盛会——主题演讲、闭门圆桌，以及全球顶尖华人创始人共聚一堂的连接之夜。', image_url: 'KV%20Image/FTU%20Image/Image3.jpg', featured: true,  sort_order: 1, published: true },
-  { category: 'quarterly', title: '会员私享沙龙 · 春季',   status: 'past',     location: '上海',   date_label: '2026年第一季度', summary: '一场关于企业传承、跨境成长与家族企业未来的私密对话之夜——仅限会员。', image_url: 'KV%20Image/FTU%20Image/Image15.jpg', featured: true,  sort_order: 2, published: true },
-  { category: 'visit',     title: '走进企业系列 · 智造专场', status: 'past',     location: '深圳',   date_label: '2025年',         summary: '会员实地走访领先的会员企业，交流运营洞见，于现场缔结合作伙伴关系。', image_url: 'KV%20Image/FTU%20Image/Image23.jpg', featured: true,  sort_order: 3, published: true },
-  { category: 'retreat',   title: '企业二代研修营',        status: 'upcoming', location: '杭州',   date_label: '2026年',         summary: '精心策划的研修营，连接企业二代与塑造事业新篇章的导师及同侪。', image_url: 'KV%20Image/FTU%20Image/Image10.jpg', featured: true,  sort_order: 4, published: true },
-  { category: 'quarterly', title: '会员私享沙龙 · 秋季',   status: 'upcoming', location: '香港',   date_label: '2026年第三季度', summary: '以"跨境资本与家族办公室"为主题的闭门交流，限额参与。', image_url: 'KV%20Image/FTU%20Image/Image12.jpg', featured: false, sort_order: 5, published: true },
-  { category: 'annual',    title: 'IE100 年度荣誉之夜',    status: 'past',     location: '上海',   date_label: '2025年',         summary: '表彰年度卓越会员企业，致敬坚守长期主义的企业家精神。', image_url: 'KV%20Image/FTU%20Image/Image16.jpg', featured: false, sort_order: 6, published: true },
-  { category: 'visit',     title: '走进企业系列 · 消费品牌', status: 'upcoming', location: '成都',   date_label: '2026年',         summary: '探访新消费标杆企业，解析品牌增长与组织进化的一线实践。', image_url: 'KV%20Image/FTU%20Image/Image1.jpg', featured: false, sort_order: 7, published: true },
-  { category: 'retreat',   title: '东方智慧 · 领袖私塾',    status: 'past',     location: '苏州',   date_label: '2025年',         summary: '融合东方哲学与现代管理的沉浸式研修，与三两知己品茗静思、同修共进。', image_url: 'KV%20Image/FTU%20Image/Image17.jpg', featured: false, sort_order: 8, published: true },
+  { category: 'launch', title: '巅峰启幕 · 聚力环球', status: 'past', location: '新加坡', date_label: '2026年9月18日', summary: 'IE100 CLUB国际企业家100俱乐部新加坡盛大启航——狮城聚贤，盛启新章！海内外华人企业家、新锐创始人、企业家二代代表齐聚现场，共同见证这一跨国精英商业平台的正式诞生。', image_url: 'Event%20Photos/开幕典礼/DSC_1254-web.jpg', featured: true, sort_order: 1, published: true },
 ];

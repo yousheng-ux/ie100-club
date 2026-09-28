@@ -14,7 +14,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <script src="supabase-config.js" defer></script>
   <script src="vendor/purify.min.js" defer></script>
-  <script src="content.js?v=3" defer></script>
+  <script src="content.js?v=4" defer></script>
 </head>
 <body>
 
@@ -62,99 +62,14 @@
   <!-- events-grid is rebuilt from the events table by content.js; cards below are fallback. -->
   <section class="block events">
     <div class="wrap">
-      <div class="tabs reveal">
-        <button class="tab active" data-cat="all">全部</button>
-        <button class="tab" data-cat="annual">年度大会</button>
-        <button class="tab" data-cat="quarterly">季度交流会</button>
-        <button class="tab" data-cat="visit">企业走访</button>
-        <button class="tab" data-cat="retreat">领袖研修</button>
-      </div>
-
-      <div class="events-grid">
-        <article class="event reveal" data-cat="annual">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image3.jpg" alt="年度大会" /></div>
+      <div class="events-grid" data-full>
+        <article class="event reveal" data-cat="launch">
+          <div class="media"><img src="Event%20Photos/开幕典礼/DSC_1254-web.jpg" alt="开幕盛典" /></div>
           <div class="event-body">
-            <span class="cat">年度大会</span>
-            <h3>IE100 全球企业家论坛</h3>
-            <p class="meta">预告 · 新加坡 · 2026年第四季度</p>
-            <p>旗舰年度盛会——主题演讲、闭门圆桌，以及全球顶尖华人创始人共聚一堂的连接之夜。</p>
-            <a href="#" class="learn">查看详情</a>
-          </div>
-        </article>
-
-        <article class="event reveal" data-cat="quarterly">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image15.jpg" alt="季度交流会" /></div>
-          <div class="event-body">
-            <span class="cat">季度交流会</span>
-            <h3>会员私享沙龙 · 春季</h3>
-            <p class="meta">回顾 · 上海 · 2026年第一季度</p>
-            <p>一场关于企业传承、跨境成长与家族企业未来的私密对话之夜——仅限会员。</p>
-            <a href="#" class="learn">查看详情</a>
-          </div>
-        </article>
-
-        <article class="event reveal" data-cat="visit">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image23.jpg" alt="企业走访" /></div>
-          <div class="event-body">
-            <span class="cat">企业走访</span>
-            <h3>走进企业系列 · 智造专场</h3>
-            <p class="meta">回顾 · 深圳 · 2025年</p>
-            <p>会员实地走访领先的会员企业，交流运营洞见，于现场缔结合作伙伴关系。</p>
-            <a href="#" class="learn">查看详情</a>
-          </div>
-        </article>
-
-        <article class="event reveal" data-cat="retreat">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image10.jpg" alt="领袖研修" /></div>
-          <div class="event-body">
-            <span class="cat">领袖研修</span>
-            <h3>企业二代研修营</h3>
-            <p class="meta">预告 · 杭州 · 2026年</p>
-            <p>精心策划的研修营，连接企业二代与塑造事业新篇章的导师及同侪。</p>
-            <a href="#" class="learn">查看详情</a>
-          </div>
-        </article>
-
-        <article class="event reveal" data-cat="quarterly">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image12.jpg" alt="季度交流会" /></div>
-          <div class="event-body">
-            <span class="cat">季度交流会</span>
-            <h3>会员私享沙龙 · 秋季</h3>
-            <p class="meta">预告 · 香港 · 2026年第三季度</p>
-            <p>以"跨境资本与家族办公室"为主题的闭门交流，限额参与。</p>
-            <a href="#" class="learn">查看详情</a>
-          </div>
-        </article>
-
-        <article class="event reveal" data-cat="annual">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image16.jpg" alt="年度盛典" /></div>
-          <div class="event-body">
-            <span class="cat">年度大会</span>
-            <h3>IE100 年度荣誉之夜</h3>
-            <p class="meta">回顾 · 上海 · 2025年</p>
-            <p>表彰年度卓越会员企业，致敬坚守长期主义的企业家精神。</p>
-            <a href="#" class="learn">查看详情</a>
-          </div>
-        </article>
-
-        <article class="event reveal" data-cat="visit">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image1.jpg" alt="企业走访" /></div>
-          <div class="event-body">
-            <span class="cat">企业走访</span>
-            <h3>走进企业系列 · 消费品牌</h3>
-            <p class="meta">预告 · 成都 · 2026年</p>
-            <p>探访新消费标杆企业，解析品牌增长与组织进化的一线实践。</p>
-            <a href="#" class="learn">查看详情</a>
-          </div>
-        </article>
-
-        <article class="event reveal" data-cat="retreat">
-          <div class="media"><img src="KV%20Image/FTU%20Image/Image17.jpg" alt="领袖研修" /></div>
-          <div class="event-body">
-            <span class="cat">领袖研修</span>
-            <h3>东方智慧 · 领袖私塾</h3>
-            <p class="meta">回顾 · 苏州 · 2025年</p>
-            <p>融合东方哲学与现代管理的沉浸式研修，与三两知己品茗静思、同修共进。</p>
+            <span class="cat">开幕盛典</span>
+            <h3>巅峰启幕 · 聚力环球</h3>
+            <p class="meta">回顾 · 新加坡 · 2026年9月18日</p>
+            <p>IE100 CLUB国际企业家100俱乐部新加坡盛大启航——狮城聚贤，盛启新章！海内外华人企业家、新锐创始人、企业家二代代表齐聚现场，共同见证这一跨国精英商业平台的正式诞生。</p>
             <a href="#" class="learn">查看详情</a>
           </div>
         </article>

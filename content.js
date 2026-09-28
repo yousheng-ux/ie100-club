@@ -16,7 +16,7 @@
                  CFG.anonKey && CFG.anonKey.indexOf('YOUR-') === -1);
   var DOC_CACHE = 'ie100_doc_v2';
   var EV_CACHE  = 'ie100_events_v2';
-  var CAT_LABELS = { annual: '年度大会', quarterly: '季度交流会', visit: '企业走访', retreat: '领袖研修' };
+  var CAT_LABELS = { launch: '开幕盛典', annual: '年度大会', quarterly: '季度交流会', visit: '企业走访', retreat: '领袖研修' };
   var catLabels = null; // overridden from doc.events.categoryLabels
 
   // ---------------------------------------------------------------
@@ -156,7 +156,7 @@
   function renderEvents(rows) {
     var grid = document.querySelector('.events-grid');
     if (!grid || !rows || !rows.length) return; // keep fallback HTML on empty
-    var isFull = !!document.querySelector('.tabs .tab');
+    var isFull = grid.hasAttribute('data-full'); // events.html marks its grid; homepage shows featured only
     var list = rows.slice();
     if (!isFull) {
       var feat = list.filter(function (r) { return r.featured; });
