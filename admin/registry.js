@@ -360,5 +360,5 @@ window.IE100_FORMS_DEFAULT = {
 
 // ---- events seed (the single card currently on events.html; featured so it also shows on the homepage) ----
 window.IE100_EVENTS_SEED = [
-  { category: 'launch', title: '巅峰启幕 · 聚力环球', status: 'past', location: '新加坡', date_label: '2026年9月18日', summary: 'IE100 CLUB国际企业家100俱乐部新加坡盛大启航——狮城聚贤，盛启新章！海内外华人企业家、新锐创始人、企业家二代代表齐聚现场，共同见证这一跨国精英商业平台的正式诞生。', image_url: 'Event%20Photos/开幕典礼/DSC_1254-web.jpg', featured: true, sort_order: 1, published: true },
+  { category: 'launch', title: '巅峰启幕 · 聚力环球', status: 'past', location: '新加坡', date_label: '2026年9月18日', summary: 'IE100 CLUB国际企业家100俱乐部新加坡盛大启航——狮城聚贤，盛启新章！海内外华人企业家、新锐创始人、企业家二代代表齐聚现场，共同见证这一跨国精英商业平台的正式诞生。', image_url: 'Event%20Photos/开幕典礼/DSC_1254-web.jpg', detail_url: 'event-2026-singapore-launch.html', featured: true, sort_order: 1, published: true },
 ];

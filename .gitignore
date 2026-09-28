@@ -1,5 +1,6 @@
 ProjectInfo/*.jpg
 ProjectInfo/*.md
+ProjectInfo/*.html
 *.psd
 Archive/
 
@@ -8,3 +9,12 @@ admin/SETUP.md
 admin/SECURITY-SETUP.md
 admin/使用指南.md
 admin/supabase-setup.sql
+
+# Event photo/video originals stay local; only web-sized copies are published
+Event Photos/**/*.JPG
+Event Photos/**/*.jpg
+Event Photos/**/*.png
+Event Photos/**/*.mp4
+!Event Photos/**/*-web.jpg
+!Event Photos/**/*-web.mp4
+!Event Photos/**/video-poster.jpg
