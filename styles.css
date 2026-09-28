@@ -302,7 +302,7 @@
     .events { background: var(--white); }
     .events-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 56px 48px; }
     .event { display: flex; flex-direction: column; }
-    .event .media { overflow: hidden; }
+    .event .media { overflow: hidden; display: block; }
     .event img { width: 100%; height: 320px; object-fit: cover; border-radius: 0; transition: transform 1.1s var(--ease); }
     .event:hover img { transform: scale(1.06); }
     .event-body { padding: 26px 2px 0; }

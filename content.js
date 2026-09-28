@@ -127,19 +127,21 @@
     art.className = 'event reveal in';
     art.setAttribute('data-cat', r.category || '');
 
-    var media = document.createElement('div'); media.className = 'media';
+    var href = isFull ? (r.detail_url || '#') : 'events.html';
+    var media = document.createElement('a'); media.className = 'media'; media.href = href;
     var img = document.createElement('img');
     img.src = r.image_url || ''; img.alt = labelFor(r.category); img.loading = 'lazy';
     media.appendChild(img);
 
     var body = document.createElement('div'); body.className = 'event-body';
     body.appendChild(make('span', 'cat', labelFor(r.category)));
-    body.appendChild(make('h3', '', r.title || ''));
+    var h3 = make('h3', ''); var titleLink = document.createElement('a'); titleLink.href = href; titleLink.textContent = r.title || ''; h3.appendChild(titleLink);
+    body.appendChild(h3);
     var metaText = [r.status === 'past' ? '回顾' : '预告', r.location, r.date_label].filter(Boolean).join(' · ');
     body.appendChild(make('p', 'meta', metaText));
     body.appendChild(make('p', '', r.summary || ''));
     var a = document.createElement('a'); a.className = 'learn';
-    a.href = isFull ? (r.detail_url || '#') : 'events.html';
+    a.href = href;
     a.textContent = '查看详情';
     body.appendChild(a);
 
