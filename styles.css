@@ -382,6 +382,7 @@
     .cards .card:nth-child(2), .events-grid .event:nth-child(2), .leaders-grid .leader:nth-child(2) { transition-delay: .08s; }
     .cards .card:nth-child(3), .leaders-grid .leader:nth-child(3) { transition-delay: .16s; }
     .leaders-grid .leader:nth-child(4) { transition-delay: .24s; }
+    .leaders-grid .leader:nth-child(5) { transition-delay: .32s; }
 
     @media (prefers-reduced-motion: reduce) {
       .reveal { transition: none; opacity: 1; transform: none; }

@@ -104,6 +104,9 @@ window.IE100_REGISTRY = {
           { key: 'index.leaders.person.3.name', label: '成员4 · 姓名', type: 'text', value: 'Tony Chan' },
           { key: 'index.leaders.person.3.role', label: '成员4 · 职务', type: 'text', value: '资源顾问' },
           { key: 'index.leaders.person.3.bio', label: '成员4 · 简介', type: 'textarea', value: '连接跨市场的新一代创始人，促进导师指导与长久的合作伙伴关系。' },
+          { key: 'index.leaders.person.4.name', label: '成员5 · 姓名', type: 'text', value: '林文惠博士' },
+          { key: 'index.leaders.person.4.role', label: '成员5 · 职务', type: 'text', value: '特聘导师' },
+          { key: 'index.leaders.person.4.bio', label: '成员5 · 简介', type: 'textarea', value: '国际教练联合会认证教练 | 共享领导力团队教练 | 世界 NLP 学院认证教练、培训师与咨询师。INSEED 企业家变革项目培训师，首创「双师模式」，深耕家族企业传承辅导，实战经验丰富。' },
           { key: 'index.leaders.person.3.img', label: '成员4 · 照片', type: 'image', value: "KV%20Image/FTU%20Image/Image9.jpg" },
         ]},
         { title: '底部行动区 CTA', fields: [
@@ -173,6 +176,9 @@ window.IE100_REGISTRY = {
           { key: 'about.leaders.person.3.name', label: '成员4 · 姓名', type: 'text', value: 'Tony Chan' },
           { key: 'about.leaders.person.3.role', label: '成员4 · 职务', type: 'text', value: '资源顾问' },
           { key: 'about.leaders.person.3.bio', label: '成员4 · 简介', type: 'textarea', value: '连接跨市场的新一代创始人，促进导师指导与长久的合作伙伴关系。' },
+          { key: 'about.leaders.person.4.name', label: '成员5 · 姓名', type: 'text', value: '林文惠博士' },
+          { key: 'about.leaders.person.4.role', label: '成员5 · 职务', type: 'text', value: '特聘导师' },
+          { key: 'about.leaders.person.4.bio', label: '成员5 · 简介', type: 'textarea', value: '国际教练联合会认证教练 | 共享领导力团队教练 | 世界 NLP 学院认证教练、培训师与咨询师。INSEED 企业家变革项目培训师，首创「双师模式」，深耕家族企业传承辅导，实战经验丰富。' },
           { key: 'about.leaders.person.3.img', label: '成员4 · 照片', type: 'image', value: "KV%20Image/FTU%20Image/Image9.jpg" },
         ]},
         { title: '底部行动区 CTA', fields: [
