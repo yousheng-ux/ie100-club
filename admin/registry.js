@@ -151,7 +151,7 @@ window.IE100_REGISTRY = {
           { key: 'about.strength.item.2.title', label: '能力3 · 标题', type: 'text', value: '二代资源链接' },
           { key: 'about.strength.item.2.body', label: '能力3 · 描述', type: 'textarea', value: '连接企业二代与全球范围内的导师、同侪及专属体验，助力新一代企业家成长，承启家族与事业的未来。' },
           { key: 'about.strength.item.3.title', label: '能力4 · 标题', type: 'text', value: '各类线下活动' },
-          { key: 'about.strength.item.3.body', label: '能力4 · 描述', type: 'textarea', value: '从年度大会、季度交流会到企业走访与领袖研修，多元的线下场景让信任在真实的相遇中自然生长。' },
+          { key: 'about.strength.item.3.body', label: '能力4 · 描述', type: 'textarea', value: '年度大会与论坛、私享沙龙酒会、商务午荟、行业主题分享会以及不定期企业参访，多元的线下场景让信任在真实的相遇中自然生长。' },
         ]},
         { title: '闭环生态特写', fields: [
           { key: 'about.feature.img', label: '大图', type: 'image', value: "KV%20Image/FTU%20Image/Image1.jpg" },
