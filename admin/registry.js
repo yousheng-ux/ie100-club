@@ -112,7 +112,7 @@ window.IE100_REGISTRY = {
         { title: '底部行动区 CTA', fields: [
           { key: 'index.cta.eyebrow', label: '小标题', type: 'text', value: '受邀制会员 · Membership' },
           { key: 'index.cta.title', label: '标题（换行用回车）', type: 'textarea', value: '全球限额 100 位\n受邀制高端社群' },
-          { key: 'index.cta.text1', label: '正文', type: 'textarea', value: '入会资格：具有一定实力的企业家、有潜力的青年创始人（含企业家二代）。申请方法：会员推荐，理事会审批。' },
+          { key: 'index.cta.text1', label: '正文', type: 'textarea', value: '入会资格：具有一定实力的企业家、有潜力的青年创始人（包括企业家二代）。申请方法：会员推荐，理事会审批。' },
         ]},
       ]
     },
@@ -261,7 +261,7 @@ window.IE100_REGISTRY = {
         { title: '入会资格', fields: [
           { key: 'membership.eligibility.eyebrow', label: '小标题', type: 'text', value: '入会资格' },
           { key: 'membership.eligibility.title', label: '标题（换行用回车）', type: 'textarea', value: '明确的门槛，\n纯粹的圈层' },
-          { key: 'membership.eligibility.prose', label: '正文（多段，可加粗）', type: 'rich', value: '<p class="lead">IE100 采用会员推荐、理事会审批的甄选机制，会员数量上限 100 人，宁缺毋滥。</p>\n<p><strong>入会资格 ·</strong> 具备一定实力的企业家。</p>\n<p><strong>申请方法 ·</strong> 会员推荐，理事会审批。</p>\n<p><strong>国际会员来自 ·</strong> 新加坡、中国、东南亚、欧美，以华文为交流语言的各国企业家。</p>\n<p><strong>主席 ·</strong> Alan Yang 杨照林，轮值主席每年一位。</p>' },
+          { key: 'membership.eligibility.prose', label: '正文（多段，可加粗）', type: 'rich', value: '<p class="lead">IE100 采用会员推荐、理事会审批的甄选机制，会员数量上限 100 人，宁缺毋滥。</p>\n<p><strong>入会资格 ·</strong> 具有一定实力的企业家、有潜力的青年创始人（包括企业家二代）。</p>\n<p><strong>申请方法 ·</strong> 会员推荐，理事会审批。</p>\n<p><strong>国际会员来自 ·</strong> 新加坡、中国、东南亚、欧美，以华文为交流语言的各国企业家。</p>\n<p><strong>主席 ·</strong> Alan Yang 杨照林，轮值主席每年一位。</p>' },
         ]},
         { title: '申请流程', fields: [
           { key: 'membership.process.eyebrow', label: '小标题', type: 'text', value: '申请流程' },
