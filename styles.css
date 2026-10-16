@@ -737,25 +737,37 @@
     .visit-empty { padding: 40px 0; text-align: center; color: var(--slate); font-size: 14px; }
 
     /* visit detail page */
-    .banner-inner h1.visit-title { max-width: none; font-size: clamp(28px, 4.2vw, 52px); line-height: 1.3; }
-    .visit-feature h2 + .visit-role { margin: -12px 0 22px; font-size: 14px; color: var(--gold); letter-spacing: 0.04em; }
+    .banner-inner h1.visit-title { max-width: none; font-size: clamp(28px, 4.2vw, 50px); line-height: 1.3; }
+    .page-banner.visit-article-banner { min-height: clamp(380px, 44vw, 540px); }
+    /* article: profile sidebar stays in view (below the fixed header) while the story scrolls */
+    .visit-body { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
+    .visit-profile { position: sticky; top: 110px; }
+    .visit-profile .back-link { margin-bottom: 26px; }
+    .visit-kv { margin-top: 22px; border-top: 1px solid var(--line); }
+    .visit-kv div { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .visit-kv dt { flex: none; font-size: 13px; color: var(--gold); letter-spacing: 0.02em; }
+    .visit-kv dd { font-size: 14px; color: var(--ink); text-align: right; line-height: 1.7; }
+    .visit-kv a:hover, .visit-prose a:not(.learn):hover { color: var(--navy); }
+    .visit-prose { min-width: 0; }
+    .visit-prose .lead { font-size: clamp(19px, 2.1vw, 23px); line-height: 1.75; }
+    .visit-prose .visit-fig { margin: 40px 0; }
+    .visit-prose .visit-fig:first-child { margin-top: 0; }
+    .visit-pull { margin: 44px 0; padding: 32px 0 30px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--line); }
+    .visit-pull p { font-family: var(--serif); font-size: clamp(20px, 2.5vw, 27px); line-height: 1.65; color: var(--ink); margin: 0; }
+    .visit-pull cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--slate); letter-spacing: 0.04em; }
+    .visit-back-end { margin-top: 36px; color: var(--navy); }
     .visit-co { font-family: var(--serif); font-size: 26px; font-weight: 500; line-height: 1.4; color: var(--ink); margin-bottom: 22px; }
     .visit-co span { display: block; font-family: var(--display); font-style: italic; font-size: 18px; color: var(--gold); margin-top: 2px; }
     .visit-fig { margin: 0 0 30px; }
     .visit-fig img { width: 100%; height: auto; }
-    .visit-fig figcaption, .photo-cap { margin-top: 12px; font-size: 13px; color: var(--slate); letter-spacing: 0.02em; }
-    .visit-feature { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-    .visit-feature h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(24px, 3vw, 34px); line-height: 1.45; letter-spacing: 0.01em; margin: 20px 0 22px; color: var(--ink); }
-    .photo-full.natural img { height: auto; }
-    .photo-full.natural { max-width: 1100px; margin: 0 auto; }
-    .photo-full .photo-cap { text-align: center; }
+    .visit-fig figcaption { margin-top: 12px; font-size: 13px; color: var(--slate); letter-spacing: 0.02em; }
 
     @media (max-width: 1023px) {
       .visit-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 900px) {
-      .visit-cover, .visit-feature { grid-template-columns: 1fr; }
-      .photo-full.natural img { height: auto; }
+      .visit-cover, .visit-body { grid-template-columns: 1fr; }
+      .visit-profile { position: static; }
     }
     @media (max-width: 560px) {
       .visit-grid { grid-template-columns: 1fr; }

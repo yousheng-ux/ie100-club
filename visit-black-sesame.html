@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <script src="supabase-config.js" defer></script>
@@ -51,96 +51,76 @@
   </div>
 
   <!-- ===== PAGE BANNER ===== -->
-  <section class="page-banner event-banner">
-    <div class="banner-bg" style="background-image:url('Event%20Photos/企业参访/visit-3-web.jpg');background-position:center 40%;"></div>
+  <section class="page-banner visit-article-banner">
+    <div class="banner-bg" style="background-image:url('KV%20Image/FTU%20Image/Image3.jpg')"></div>
     <div class="wrap banner-inner">
       <span class="eyebrow">企业参访 · 科技创新</span>
       <h1 class="visit-title">IE100会员企业参访系列之<br>走进黑芝麻智能科技</h1>
-      <p>Black Sesame Technologies</p>
+      <p>黑芝麻智能科技 Black Sesame Technologies</p>
     </div>
   </section>
 
-  <!-- ===== 企业档案 + 导语 ===== -->
+  <!-- ===== 正文：左侧企业档案（随页面停留）· 右侧图文 ===== -->
   <section class="block">
     <div class="wrap">
-      <div class="split reveal">
-        <div class="split-head">
+      <div class="visit-body">
+        <aside class="visit-profile">
           <a href="visits.html" class="learn back-link">返回企业参访</a>
           <div class="visit-co">黑芝麻智能科技<span>Black Sesame Technologies</span></div>
-          <div class="event-meta">
-            <div class="meta-item"><span class="meta-label">行业</span><span class="meta-value">车规级 AI 芯片</span></div>
-            <div class="meta-item"><span class="meta-label">成立</span><span class="meta-value">2016年</span></div>
-            <div class="meta-item"><span class="meta-label">上市</span><span class="meta-value">2024年 · 港交所主板 2533.HK</span></div>
-            <div class="meta-item"><span class="meta-label">主要产品</span><span class="meta-value">华山系列 · 武当系列</span></div>
-            <div class="meta-item"><span class="meta-label">参访日期</span><span class="meta-value">9月18日上午</span></div>
-            <div class="meta-item"><span class="meta-label">公司网址</span><span class="meta-value"><a href="https://www.bst.ai" target="_blank" rel="noopener">www.bst.ai</a></span></div>
-          </div>
-        </div>
-        <div class="prose">
+          <dl class="visit-kv">
+            <div><dt>行业</dt><dd>科技创新 · 车规级 AI 芯片</dd></div>
+            <div><dt>成立</dt><dd>2016 年</dd></div>
+            <div><dt>上市</dt><dd>2024 年 · 港交所主板 2533.HK</dd></div>
+            <div><dt>主要产品</dt><dd>华山系列 · 武当系列</dd></div>
+            <div><dt>参访引领</dt><dd>徐劲博士 · 黑芝麻智能科技（新加坡）总经理</dd></div>
+            <div><dt>参访日期</dt><dd>9 月 18 日上午</dd></div>
+            <div><dt>官网</dt><dd><a href="https://www.bst.ai" target="_blank" rel="noopener">www.bst.ai</a></dd></div>
+          </dl>
+        </aside>
+
+        <article class="prose visit-prose">
           <figure class="visit-fig">
-            <img src="Event%20Photos/企业参访/visit-1-web.jpg" alt="IE100 会员企业家在黑芝麻智能会议室交流" />
+            <img src="Event%20Photos/企业参访/visit-3-web.jpg" alt="IE100 会员企业家与黑芝麻智能团队合影" />
+            <figcaption>IE100 会员企业家与黑芝麻智能团队合影</figcaption>
           </figure>
+
           <p class="lead">9月18日上午，IE100俱乐部组织会员企业家以及外国来宾，走进会员优质企业——黑芝麻智能科技Black Sesame Technologies，亲临前沿科创一线，沉浸式探访硬核AI芯片企业的创新实力。</p>
-          <p>黑芝麻智能科技有限公司是领先的车规级智能汽车计算芯片及基于芯片的解决方案供应商。黑芝麻智能成立于2016年，于2024年正式在香港交易所主板挂牌上市，股票代码2533.HK。公司从用于辅助驾驶的华山系列高算力芯片开始，2023年推出了武当系列跨域计算芯片，以满足对智能汽车先进功能的更多样化及复杂需求，同时开始拓展更多应用领域。公司自有的车规级产品及技术为智能汽车配备关键任务能力，包括辅助驾驶、智能座舱、先进成像及互联等。通过由公司自行研发的IP核、算法和支持软件驱动的SoC和基于SoC的解决方案，提供全栈式辅助驾驶能力以满足客户的广泛需求。</p>
+          <p>黑芝麻智能科技有限公司是领先的车规级智能汽车计算芯片及基于芯片的解决方案供应商。黑芝麻智能成立于2016年，于2024年正式在香港交易所主板挂牌上市，股票代码2533.HK。公司从用于辅助驾驶的华山系列高算力芯片开始，2023年推出了武当系列跨域计算芯片，以满足对智能汽车先进功能的更多样化及复杂需求，同时开始拓展更多应用领域。</p>
+          <p>公司自有的车规级产品及技术为智能汽车配备关键任务能力，包括辅助驾驶、智能座舱、先进成像及互联等。通过由公司自行研发的IP核、算法和支持软件驱动的SoC和基于SoC的解决方案，提供全栈式辅助驾驶能力以满足客户的广泛需求。</p>
           <p>公司网址：<a href="https://www.bst.ai" target="_blank" rel="noopener">www.bst.ai</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== 参访引领 ===== -->
-  <section class="block" style="background:var(--cream);">
-    <div class="wrap">
-      <div class="visit-feature reveal">
-        <figure class="visit-fig" style="margin:0;">
-          <img src="Event%20Photos/企业参访/visit-2-web.jpg" alt="徐劲博士在 IE100 开幕论坛分享" loading="lazy" />
-          <figcaption>徐劲博士在 IE100 开幕论坛上分享</figcaption>
-        </figure>
-        <div class="prose">
-          <span class="eyebrow">参访引领</span>
-          <h2>徐劲博士</h2>
-          <p class="visit-role">黑芝麻智能科技（新加坡）总经理</p>
+          <figure class="visit-fig">
+            <img src="Event%20Photos/企业参访/visit-2-web.jpg" alt="徐劲博士在 IE100 开幕论坛上分享" loading="lazy" />
+            <figcaption>徐劲博士在 IE100 开幕论坛上分享</figcaption>
+          </figure>
+
           <p>本次专属参访由IE100开幕论坛重磅主讲嘉宾、黑芝麻智能科技（新加坡）总经理徐劲博士全程引领。此前，徐劲博士在IE100开幕论坛上以前瞻、务实的行业分享，为一众企业家厘清数字化转型思路、赋能产业创新升级，收获会员高度认可。本次再度深度链接，为会员搭建了直面顶尖科创核心、跨界交流学习的高端平台。</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== 合影 ===== -->
-  <section class="block" style="padding-bottom:0;">
-    <div class="wrap">
-      <figure class="photo-full natural reveal">
-        <img src="Event%20Photos/企业参访/visit-3-web.jpg" alt="IE100 会员企业家与黑芝麻智能团队合影" loading="lazy" />
-        <figcaption class="photo-cap">IE100 会员企业家与黑芝麻智能团队合影</figcaption>
-      </figure>
-    </div>
-  </section>
+          <figure class="visit-fig">
+            <img src="Event%20Photos/企业参访/visit-1-web.jpg" alt="IE100 会员企业家在黑芝麻智能会议室交流" loading="lazy" />
+            <figcaption>参访现场交流</figcaption>
+          </figure>
 
-  <!-- ===== 参访实录 ===== -->
-  <section class="block">
-    <div class="wrap">
-      <div class="split reveal">
-        <div class="split-head">
-          <span class="eyebrow">双领域技术壁垒</span>
-          <h2>比汽车行业更懂芯片，<br>比芯片行业更懂汽车</h2>
-        </div>
-        <div class="prose">
-          <p>凭借“比汽车行业更懂芯片，比芯片行业更懂汽车” 的独特双领域技术壁垒，黑芝麻智能深耕车规级芯片赛道多年，融合汽车产业落地经验与芯片研发核心技术，实现技术研发与产业场景的精准适配，稳居智能驾驶算力、AI实体赋能领域行业领跑地位。</p>
+          <blockquote class="visit-pull">
+            <p>“比汽车行业更懂芯片，比芯片行业更懂汽车。”</p>
+            <cite>— 黑芝麻智能的双领域技术壁垒</cite>
+          </blockquote>
+
+          <p>凭借这一独特的双领域技术壁垒，黑芝麻智能深耕车规级芯片赛道多年，融合汽车产业落地经验与芯片研发核心技术，实现技术研发与产业场景的精准适配，稳居智能驾驶算力、AI实体赋能领域行业领跑地位。</p>
           <p>参访全程，徐劲博士携核心技术团队全程陪同、倾囊分享，从前沿科创技术解析，到跨行业融合机遇与未来产业趋势，团队以专业细致的拆解、通俗易懂的解读、真实落地的案例，彻底打破了企业家对高端芯片、AI科技的认知壁垒。</p>
           <p>现场氛围热烈、交流深入，IE100会员企业家专注聆听、积极互动，与徐劲博士及技术团队深度研讨，在思维碰撞中突破固有行业认知，挖掘全新商业机遇与增长可能。</p>
           <p>科技赋能实体，创新驱动增长。本次参访让会员企业家走出传统行业思维，真切读懂AI与芯片技术并非行业噱头，而是新时代企业高质量发展、长效稳健增长的核心底气。大家近距离触摸硬核科创力量，清晰掌握智能算力的商业落地价值，深度明晰科技赋能产业升级的底层逻辑，全员收获满满、受益匪浅。活动尾声，徐劲博士盛情宴请全体参访嘉宾，再度彰显双方深厚的链接情谊。</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== 结语 ===== -->
-  <section class="block statement">
-    <div class="wrap reveal">
-      <span class="eyebrow">展望</span>
-      <div class="gold-rule"></div>
-      <p>每一次参访，都是一次认知迭代；<br>每一次交流，都是一次资源聚合。<span class="muted">未来，IE100俱乐部将持续深耕优质产业资源链接，常态化开展头部标杆企业参访、行业大咖深度对话、跨界资源对接活动，助力会员企业打破圈层边界、洞察行业趋势、整合优质资源，以科创思维赋能企业创新发展，实现共生共长、共赢未来。</span></p>
-      <cite>— IE100 俱乐部</cite>
+          <blockquote class="visit-pull">
+            <p>每一次参访，都是一次认知迭代；<br>每一次交流，都是一次资源聚合。</p>
+            <cite>— IE100 俱乐部</cite>
+          </blockquote>
+
+          <p>未来，IE100俱乐部将持续深耕优质产业资源链接，常态化开展头部标杆企业参访、行业大咖深度对话、跨界资源对接活动，助力会员企业打破圈层边界、洞察行业趋势、整合优质资源，以科创思维赋能企业创新发展，实现共生共长、共赢未来。</p>
+
+          <a href="visits.html" class="learn visit-back-end">返回企业参访</a>
+        </article>
+      </div>
     </div>
   </section>
 
