@@ -1,11 +1,23 @@
 // ===== 企业参访 (Company Visits) — list on visits.html =====
 // Add one entry per published visit, newest first. The featured visit is the cover
-// (hard-coded in visits.html); the filter bar + list only appear once there are
-// LIST_MIN visits, so the page never shows a lonely filter or a "1 篇" count.
+// (hard-coded in visits.html) and is left out of the cards below it. Cards appear
+// as soon as there is a second visit; the filter bar only once there are TOOLS_MIN
+// visits, so the page never shows a lonely filter or a "1 篇" count.
 //
 // ind must be one of INDUSTRIES; reg is the region label shown on cards/filters.
 (function () {
   var VISITS = [
+    {
+      href: 'visit-sibakerui.html',
+      title: 'IE100会员企业参访之走进中国天津斯巴克瑞汽车电子',
+      company: '天津斯巴克瑞汽车电子',
+      host: '蔡总 · 总经理',
+      ind: '制造工业',
+      reg: '中国大陆',
+      date: '',
+      img: 'Event%20Photos/企业参访/斯巴克瑞/sbkr-1-web.jpg',
+      featured: true
+    },
     {
       href: 'visit-black-sesame.html',
       title: 'IE100会员企业参访系列之走进黑芝麻智能科技',
@@ -14,16 +26,16 @@
       ind: '科技创新',
       reg: '',
       date: '9月18日',
-      img: 'Event%20Photos/企业参访/visit-3-web.jpg',
-      featured: true
+      img: 'Event%20Photos/企业参访/visit-3-web.jpg'
     }
   ];
 
   var INDUSTRIES = ['制造工业', '地产建筑', '金融投资', '科技创新', '消费品牌', '医疗健康', '贸易物流', '酒店文旅', '教育培训', '专业服务'];
-  var LIST_MIN = 6;
+  var TOOLS_MIN = 6;
 
   var root = document.getElementById('visitList');
-  if (!root || VISITS.length < LIST_MIN) return;
+  if (!root || VISITS.length < 2) return;
+  var withTools = VISITS.length >= TOOLS_MIN;
 
   var early = document.querySelector('.visit-early');
   if (early) early.hidden = true;
@@ -40,8 +52,9 @@
   var inds = INDUSTRIES.filter(function (n) { return VISITS.some(function (v) { return v.ind === n; }); });
   var regs = uniq(VISITS.map(function (v) { return v.reg; }));
 
-  root.innerHTML =
-    '<div class="visit-tools">' +
+  root.innerHTML = !withTools
+    ? '<span class="eyebrow visit-list-head">更多企业参访</span><div id="visitResults"></div>'
+    : '<div class="visit-tools">' +
       '<div class="visit-chips" role="group" aria-label="按行业筛选">' +
         '<button type="button" class="visit-chip" aria-pressed="true" data-ind="">全部行业</button>' +
         inds.map(function (n) { return '<button type="button" class="visit-chip" aria-pressed="false" data-ind="' + esc(n) + '">' + esc(n) + '</button>'; }).join('') +
@@ -61,7 +74,10 @@
     '<div id="visitResults"></div>';
 
   var state = { ind: '', reg: '', view: 'grid' };
-  try { var saved = localStorage.getItem('ie100_visit_view'); if (saved === 'grid' || saved === 'list') state.view = saved; } catch (e) {}
+  // the grid/list toggle only exists with the filter bar; before that it is always the grid
+  if (withTools) {
+    try { var saved = localStorage.getItem('ie100_visit_view'); if (saved === 'grid' || saved === 'list') state.view = saved; } catch (e) {}
+  }
 
   function card(v) {
     return '<article class="visit-card"><a class="media" href="' + esc(v.href) + '"><img src="' + esc(v.img) + '" alt="' + esc(v.company) + '" loading="lazy" /></a>' +
@@ -79,7 +95,8 @@
     });
     // the featured visit is already the cover above; keep it out of the unfiltered list
     if (!filtered) rows = rows.filter(function (v) { return !v.featured; });
-    document.getElementById('visitStatus').innerHTML = filtered
+    var status = document.getElementById('visitStatus');
+    if (status) status.innerHTML = filtered
       ? '筛选：<b>' + [state.ind, state.reg].filter(Boolean).map(esc).join(' · ') + '</b>'
       : '按参访时间排列';
     var out = document.getElementById('visitResults');
