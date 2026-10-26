@@ -15,7 +15,7 @@
       ind: '制造工业',
       reg: '中国大陆',
       date: '',
-      img: 'Event%20Photos/企业参访/斯巴克瑞/sbkr-1-web.jpg',
+      img: 'Event%20Photos/企业参访/斯巴克瑞/sbkr-1-web.jpg?v=2',
       featured: true
     },
     {
