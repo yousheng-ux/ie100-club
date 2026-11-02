@@ -79,6 +79,7 @@
       form.setAttribute('novalidate', ''); // we handle validation ourselves for clear CN messages
       const ok = form.querySelector('.form-success');
       if (ok && !ok.dataset.successText) ok.dataset.successText = ok.textContent;
+      const shownAt = Date.now(); // bot trap: no human fills these forms in a few seconds
 
       const showMsg = (text, isError) => {
         if (!ok) return;
@@ -102,6 +103,14 @@
         el.addEventListener('input', () => el.classList.remove('invalid'));
         el.addEventListener('change', () => el.classList.remove('invalid'));
       });
+
+      const resetForm = () => {
+        form.querySelectorAll('input, select, textarea').forEach((el) => {
+          if (el.type === 'hidden' || el.type === 'submit') return;
+          if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+          else el.value = '';
+        });
+      };
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -136,8 +145,14 @@
         });
         if (isMember && agree) lines.push('章程确认：已阅读并同意俱乐部章程');
 
-        // honeypot
+        // ---- bot traps: hidden honeypot ticked, or submitted too fast for a human ----
+        // Bots get a fake success (so they don't retry) and nothing is sent anywhere.
         const hpEl = form.querySelector('input[name="botcheck"]');
+        if ((hpEl && hpEl.checked) || Date.now() - shownAt < 4000) {
+          showMsg(ok ? ok.dataset.successText : '', false);
+          resetForm();
+          return;
+        }
 
         // Web3Forms email payload (ASCII keys; full Chinese summary in message body)
         const fd = new FormData();
@@ -149,14 +164,6 @@
         if (nameEl) fd.append('name', nameEl.value);
         if (emailEl) fd.append('email', emailEl.value); // reply-to = applicant
         fd.append('message', lines.join('\n'));
-        if (hpEl && hpEl.checked) fd.append('botcheck', 'on');
-
-        // membership applications also archived to the Google Sheet (fire-and-forget)
-        if (isMember) {
-          try {
-            fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(record) }).catch(function () {});
-          } catch (_) {}
-        }
 
         // ---- submit email via Web3Forms ----
         const btn = form.querySelector('button[type="submit"]');
@@ -166,12 +173,15 @@
           const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
           const data = await res.json();
           if (!data.success) throw new Error(data.message || 'submit failed');
+          // membership applications also archived to the Google Sheet — only after the
+          // email went through, so rejected/spam submissions never reach the sheet
+          if (isMember) {
+            try {
+              fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(record) }).catch(function () {});
+            } catch (_) {}
+          }
           showMsg(ok ? ok.dataset.successText : '', false);
-          form.querySelectorAll('input, select, textarea').forEach((el) => {
-            if (el.type === 'hidden' || el.type === 'submit') return;
-            if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
-            else el.value = '';
-          });
+          resetForm();
         } catch (err) {
           showMsg('✗ 提交失败，请稍后重试，或直接发送电邮至 info@ie100club.com', true);
         } finally {
