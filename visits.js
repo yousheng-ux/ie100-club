@@ -8,6 +8,17 @@
 (function () {
   var VISITS = [
     {
+      href: 'visit-gangbo.html',
+      title: 'IE100走进广东港博电力科技，观摩新能源企业国际化实力',
+      company: '广东港博电力科技',
+      host: '皮秋如先生 · 董事长',
+      ind: '制造工业',
+      reg: '中国大陆',
+      date: '11月',
+      img: 'Event%20Photos/企业参访/广东港博电力/gb-1-web.jpg',
+      featured: true
+    },
+    {
       href: 'visit-sibakerui.html',
       title: 'IE100会员企业参访之走进中国天津斯巴克瑞汽车电子',
       company: '天津斯巴克瑞汽车电子',
@@ -15,8 +26,7 @@
       ind: '制造工业',
       reg: '中国大陆',
       date: '',
-      img: 'Event%20Photos/企业参访/斯巴克瑞/sbkr-1-web.jpg?v=2',
-      featured: true
+      img: 'Event%20Photos/企业参访/斯巴克瑞/sbkr-1-web.jpg?v=2'
     },
     {
       href: 'visit-black-sesame.html',
