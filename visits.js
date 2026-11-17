@@ -11,7 +11,7 @@
       href: 'visit-gangbo.html',
       title: 'IE100走进广东港博电力科技，观摩新能源企业国际化实力',
       company: '广东港博电力科技',
-      host: '皮秋如先生 · 董事长',
+      host: '皮秋如董事长',
       ind: '制造工业',
       reg: '中国大陆',
       date: '11月',
